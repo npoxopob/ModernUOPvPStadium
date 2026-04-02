@@ -81,6 +81,25 @@ public partial class BaseQuiver : Container, ICraftable, IAosItem
         DamageIncrease = 10;
     }
 
+    public override void OnDoubleClick(Mobile from)
+    {
+        if (from == null)
+        {
+            return;
+        }
+        if (Parent == from)
+        {
+            base.OnDoubleClick(from); // открыть колчан, если уже надет
+            return;
+        }
+        if (IsChildOf(from.Backpack))
+        {
+            _ = from.EquipItem(this);
+            return;
+        }
+        base.OnDoubleClick(from);
+    }
+
     public override int DefaultGumpID => 0x108;
     public override int DefaultMaxItems => 1;
     public override int DefaultMaxWeight => 50;

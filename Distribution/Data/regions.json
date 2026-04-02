@@ -1,5 +1,17 @@
 [
   {
+    "$type": "Region",
+    "Map": "Felucca",
+    "Name": "Felucca PvP - Global",
+    "Priority": 0,
+    "Area": [ { "x1": 0, "y1": 0, "x2": 6144, "y2": 4096 } ],
+    "AllowHarmful": true,
+    "AllowBeneficial": true,
+    "NoStealing": false,
+    "NoHousing": false,
+    "IsGuarded": false
+  },
+  {
     "$type": "GuardedRegion",
     "Map": "Felucca",
     "Name": "Moongates",

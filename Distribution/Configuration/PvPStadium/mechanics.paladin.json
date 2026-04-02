@@ -1,0 +1,11 @@
+{
+  "ActiveHolyAura": {
+    "Enabled": true,
+    "CooldownByLevel": { "1": 180, "2": 150, "3": 120, "4": 90 },
+    "DurationByLevel": { "1": 15, "2": 18, "3": 21, "4": 24 },
+    "RadiusByLevel": { "1": 6, "2": 7, "3": 8, "4": 9 },
+    "DamageReductionByLevel": { "1": 0.90, "2": 0.85, "3": 0.80, "4": 0.75 },
+    "BlocksLifeDrain": true,
+    "Multiplier": 0.5
+  }
+}

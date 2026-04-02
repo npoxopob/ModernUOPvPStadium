@@ -400,6 +400,11 @@ public partial class BaseTalisman : Item, IAosItem
 
     public override void OnDoubleClick(Mobile from)
     {
+        if (from != null && Parent != from && IsChildOf(from.Backpack))
+        {
+            _ = from.EquipItem(this);
+            return;
+        }
         if (from.Talisman != this)
         {
             from.SendLocalizedMessage(502641); // You must equip this item to use it.

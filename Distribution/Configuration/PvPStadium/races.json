@@ -1,0 +1,57 @@
+[
+  {
+    "Key": "vampire",
+    "Display": "Vampire",
+    "Enabled": true,
+    "Levels": [
+      { "Level": 1, "Name": "Ghoul" },
+      { "Level": 2, "Name": "Vampire" },
+      { "Level": 3, "Name": "Vampire Knight" },
+      { "Level": 4, "Name": "Nosferatu Vampire" }
+    ]
+  },
+  {
+    "Key": "paladin",
+    "Display": "Path of Light",
+    "Enabled": true,
+    "Levels": [
+      { "Level": 1, "Name": "Follower of Light" },
+      { "Level": 2, "Name": "Knight of Justice" },
+      { "Level": 3, "Name": "Paladin" },
+      { "Level": 4, "Name": "Guardian of Heaven" }
+    ]
+  },
+  {
+    "Key": "berserker",
+    "Display": "Berserker Path",
+    "Enabled": true,
+    "Levels": [
+      { "Level": 1, "Name": "Adept of Might" },
+      { "Level": 2, "Name": "Barbarian" },
+      { "Level": 3, "Name": "Berserker" },
+      { "Level": 4, "Name": "Child of Ragnar" }
+    ]
+  },
+  {
+    "Key": "amazon",
+    "Display": "Amazon Path",
+    "Enabled": true,
+    "Levels": [
+      { "Level": 1, "Name": "Child of Nature" },
+      { "Level": 2, "Name": "Amazon Girl" },
+      { "Level": 3, "Name": "Amazon" },
+      { "Level": 4, "Name": "Amazon Queen" }
+    ]
+  },
+  {
+    "Key": "necromancer",
+    "Display": "Necromancer Path",
+    "Enabled": true,
+    "Levels": [
+      { "Level": 1, "Name": "Damned Soul" },
+      { "Level": 2, "Name": "Dark Prophet" },
+      { "Level": 3, "Name": "Necromancer" },
+      { "Level": 4, "Name": "High Priest of Death" }
+    ]
+  }
+]

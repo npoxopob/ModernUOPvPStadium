@@ -442,4 +442,25 @@ public abstract partial class BaseJewel : Item, ICraftable, IAosItem
 
         m?.CheckStatTimers();
     }
+
+    public override void OnDoubleClick(Mobile from)
+    {
+        if (from == null)
+        {
+            return;
+        }
+        // Если уже надето — ничего не делаем
+        if (Parent == from)
+        {
+            base.OnDoubleClick(from);
+            return;
+        }
+        // Автоэквип только из инвентаря игрока
+        if (IsChildOf(from.Backpack))
+        {
+            _ = from.EquipItem(this);
+            return;
+        }
+        base.OnDoubleClick(from);
+    }
 }

@@ -2226,6 +2226,9 @@ public abstract partial class BaseWeapon
 
         ForceOfNature.OnHit(attacker, defender);
 
+        // PvP Stadium: emit public combat event for modules
+        Server.CombatEvents.RaiseWeaponMeleeHit(attacker, defender, damage);
+
         if (defender is IHonorTarget it)
         {
             it.ReceivedHonorContext?.OnTargetHit(attacker);
@@ -4089,6 +4092,28 @@ public abstract partial class BaseWeapon
         Slayer2 = 0x10000000,
         ElementalDamages = 0x20000000,
         EngravedText = 0x40000000
+    }
+    public override void OnDoubleClick(Mobile from)
+    {
+        if (from == null)
+        {
+            return;
+        }
+
+        if (!Movable)
+        {
+            if (Parent == from)
+            {
+                return;
+            }
+        }
+
+        if (!CheckRace(from))
+        {
+            return;
+        }
+
+        _ = from.EquipItem(this);
     }
 }
 

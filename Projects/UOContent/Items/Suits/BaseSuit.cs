@@ -62,10 +62,31 @@ public abstract partial class BaseSuit : Item
 
     public override void OnDoubleClick(Mobile from)
     {
-        if (Validate())
+        if (!Validate())
+        {
+            return;
+        }
+
+        if (from == null)
+        {
+            return;
+        }
+
+        // Если уже надето — стандартное поведение
+        if (Parent == from)
         {
             base.OnDoubleClick(from);
+            return;
         }
+
+        // Автоэквип из рюкзака (AccessLevel проверится в OnEquip)
+        if (IsChildOf(from.Backpack))
+        {
+            _ = from.EquipItem(this);
+            return;
+        }
+
+        base.OnDoubleClick(from);
     }
 
     public override bool VerifyMove(Mobile from) => from.AccessLevel >= AccessLevel;

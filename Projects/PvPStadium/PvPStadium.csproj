@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <PropertyGroup>
+    <RootNamespace>PvPStadium</RootNamespace>
+    <AssemblyName>PvPStadium</AssemblyName>
+    <Product>PvP Stadium Content</Product>
+    <OutDir>..\..\Distribution\Assemblies</OutDir>
+    <PublishDir>..\..\Distribution\Assemblies</PublishDir>
+    <Configurations>Debug;Release;Analyze</Configurations>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logger\Logger.csproj" />
+    <ProjectReference Include="..\Server\Server.csproj">
+      <IncludeInPackage>false</IncludeInPackage>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UOContent\UOContent.csproj" />
+  </ItemGroup>
+</Project>

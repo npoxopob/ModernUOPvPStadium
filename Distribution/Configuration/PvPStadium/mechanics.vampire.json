@@ -1,0 +1,19 @@
+{
+  "Debug": true,
+  "ActiveLifeDrain": {
+    "Enabled": true,
+    "CooldownSec": 420,
+    "TickMs": 1000,
+    "PerTickHP": 3,
+    "MaxDurationSec": 12,
+    "PerTickHPByLevel": { "1": 2, "2": 3, "3": 4, "4": 5 },
+    "MaxDurationSecByLevel": { "1": 8, "2": 10, "3": 12, "4": 14 },
+    "MaxRange": 8,
+    "PaladinModifierEnabled": true,
+    "PaladinPvpOnly": true,
+    "PaladinPerTickMultiplierByLevel": { "1": 0.75, "2": 0.5, "3": 0.35, "4": 0.25 },
+    "PaladinDefaultMultiplier": 0.5,
+    "PaladinAuraBlocks": false,
+    "PaladinAuraMultiplier": 0.5
+  }
+}

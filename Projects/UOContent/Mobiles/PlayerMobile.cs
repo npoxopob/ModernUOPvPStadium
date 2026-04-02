@@ -2796,6 +2796,58 @@ namespace Server.Mobiles
         {
             var damageBonus = 1.0;
 
+            // PvP Stadium: universal incoming damage hook with robust logging
+            try
+            {
+                double scalar = 1.0;
+                // Ask loaded modules to modify incoming damage (via reflection to avoid hard dependency)
+                var hookType = Server.AssemblyHandler.FindTypeByFullName("PvPStadium.Mechanics.DamageHooks");
+                if (hookType != null)
+                {
+                    var mi = hookType.GetMethod("PvPStadium_OnIncomingDamage", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    if (mi != null)
+                    {
+                        object[] args = { this, from, (double)scalar };
+                        var result = mi.Invoke(null, args);
+                        if (result is bool ok && ok)
+                        {
+                            scalar = (double)args[2];
+                            if (double.IsNaN(scalar) || double.IsInfinity(scalar))
+                            {
+                                throw new InvalidOperationException($"PvPStadium_OnIncomingDamage returned invalid scalar: {scalar}");
+                            }
+
+                            scalar = Math.Max(0.0, scalar);
+                            amount = (int)Math.Round(amount * scalar);
+                            if (amount < 0)
+                            {
+                                amount = 0;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log to server logs
+                var logger = Server.Logging.LogFactory.GetLogger(typeof(PlayerMobile));
+                logger.Error(ex, "[PvPStadium] Error in OnIncomingDamage hook: {Message}", ex.Message);
+
+                // Notify online administrators in-game
+                try
+                {
+                    foreach (var ns in Server.Network.NetState.Instances)
+                    {
+                        var gm = ns.Mobile;
+                        if (gm != null && gm.AccessLevel >= AccessLevel.Administrator)
+                        {
+                            gm.SendMessage(0x22, $"[PvPStadium] Error in OnIncomingDamage hook: {ex.Message}");
+                        }
+                    }
+                }
+                catch { /* ignore secondary notification failures */ }
+            }
+
             if (EvilOmenSpell.EndEffect(this) && !ignoreEvilOmen)
             {
                 damageBonus += 0.25;

@@ -285,8 +285,53 @@ public static partial class CharacterCreation
             newChar.AddItem(new StaffRobe(newChar.AccessLevel));
         }
 
+        // PvP Stadium: clear appearance (no hair, no starting clothes) regardless of gender
+        try
+        {
+            if (newChar is PlayerMobile pmNew)
+            {
+                pmNew.HairItemID = 0;
+                pmNew.FacialHairItemID = 0;
+                pmNew.HairHue = 0;
+                pmNew.FacialHairHue = 0;
+                pmNew.Hue = 0;
+
+                for (int i = pmNew.Items.Count - 1; i >= 0; i--)
+                {
+                    var it = pmNew.Items[i];
+                    if (it == null) continue;
+                    var layer = it.Layer;
+                    if (layer == Layer.Backpack || layer == Layer.Bank || layer == Layer.Mount || layer == Layer.Invalid)
+                        continue;
+                    if (layer == Layer.Hair || layer == Layer.FacialHair)
+                    {
+                        it.Delete();
+                        continue;
+                    }
+                    it.Delete();
+                }
+            }
+        }
+        catch { }
+
+        // PvP Stadium: ensure Young is disabled at creation (both character and account)
+        try
+        {
+            if (newChar is PlayerMobile pmYoung)
+            {
+                pmYoung.Young = false;
+                if (pmYoung.Account is Server.Accounting.Account acc)
+                {
+                    acc.Young = false;
+                }
+            }
+        }
+        catch { }
+
+        // PvP Stadium: spawn in the chosen city coordinates but force Felucca facet when available
         var city = GetStartLocation(args);
-        newChar.MoveToWorld(city.Location, city.Map);
+        var spawnMap = ExpansionInfo.CoreExpansion.MapSelectionFlags.Includes(MapSelectionFlags.Felucca) ? Map.Felucca : city.Map;
+        newChar.MoveToWorld(city.Location, spawnMap);
 
         logger.Information(
             "Login: {0}: New character being created (account={1}, character={2}, serial={3}, started.city={4}, started.location={5}, started.map={6})",

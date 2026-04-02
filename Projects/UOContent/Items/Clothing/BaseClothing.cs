@@ -1052,5 +1052,28 @@ namespace Server.Items
             Quality = 0x00000200,
             StrReq = 0x00000400
         }
+
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (from == null)
+            {
+                return;
+            }
+
+            if (!Movable)
+            {
+                if (Parent == from)
+                {
+                    return;
+                }
+            }
+
+            if (!CheckRace(from))
+            {
+                return;
+            }
+
+            _ = from.EquipItem(this);
+        }
     }
 }

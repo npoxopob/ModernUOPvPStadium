@@ -1669,5 +1669,31 @@ namespace Server.Items
             SkillBonuses = 0x00800000,
             PlayerConstructed = 0x01000000
         }
+
+        public override void OnDoubleClick(Mobile from)
+    {
+        if (from == null)
+        {
+            return;
+        }
+
+        if (!Movable)
+        {
+            // Если уже надето — ничего не делаем
+            if (Parent == from)
+            {
+                return;
+            }
+        }
+
+        // Проверка расы и базовых ограничений
+        if (!CheckRace(from))
+        {
+            return;
+        }
+
+        // Пытаемся экипировать
+        _ = from.EquipItem(this);
+    }
     }
 }
