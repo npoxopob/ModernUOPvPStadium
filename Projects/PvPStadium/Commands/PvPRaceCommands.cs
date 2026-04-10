@@ -174,6 +174,7 @@ public static class PvPRaceCommands
             var levelName = RaceRegistry.GetLevelName(_raceKey, _level);
             from.SendMessage(0x44, $"Set {pm.Name} to {_raceKey} level {_level} ({levelName}).");
             pm.SendMessage(0x35, $"Your PvP race is now: {levelName}");
+            pm.InvalidateProperties();
         }
 
         protected override void OnTargetCancel(Mobile from, TargetCancelType cancel)

@@ -92,6 +92,7 @@ internal static class RaceService
 
         var levelName = RaceRegistry.GetLevelName(raceKey, level);
         pm.SendMessage(0x35, $"Ваша раса изменена на {levelName}.");
+        pm.InvalidateProperties();
         _log.Information("[PvP Stadium] Logical race '{RaceKey}' (level {Level}) assigned to {Player}", raceKey, level, pm);
     }
 
