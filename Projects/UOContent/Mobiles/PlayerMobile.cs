@@ -3475,6 +3475,19 @@ namespace Server.Mobiles
         {
             base.GetProperties(list);
 
+            // PvP Stadium: add race title to tooltip
+            try
+            {
+                var hookType = Server.AssemblyHandler.FindTypeByFullName("PvPStadium.Mechanics.TooltipHooks");
+                if (hookType != null)
+                {
+                    var mi = hookType.GetMethod("PvPStadium_AddRaceTitle",
+                        System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    mi?.Invoke(null, new object[] { this, list });
+                }
+            }
+            catch { }
+
             if (Map == Faction.Facet)
             {
                 var pl = PlayerState.Find(this);
