@@ -50,6 +50,28 @@ public static class PvPRaceCommands
             e.Mobile.SendMessage(0x44, "Race list reloaded.");
         });
 
+        // GM command to set PvP logical race and level on a target player
+        CommandSystem.Register("SetPvPRace", AccessLevel.GameMaster, e =>
+        {
+            if (e.Arguments.Length < 2)
+            {
+                e.Mobile.SendMessage("Usage: [SetPvPRace <raceKey> <level>");
+                e.Mobile.SendMessage("Example: [SetPvPRace vampire 4");
+                e.Mobile.SendMessage("Keys: vampire, paladin, berserker, amazon, necromancer, human");
+                return;
+            }
+
+            var raceKey = e.Arguments[0].ToLower();
+            if (!int.TryParse(e.Arguments[1], out var level) || level < 1 || level > 4)
+            {
+                e.Mobile.SendMessage(0x22, "Level must be 1-4.");
+                return;
+            }
+
+            e.Mobile.Target = new SetPvPRaceTarget(raceKey, level);
+            e.Mobile.SendMessage(0x44, $"Target a player to set race={raceKey} level={level}");
+        });
+
         // Сброс КД LifeDrain у выбранной цели
         CommandSystem.Register("LifeDrainReset", AccessLevel.GameMaster, e =>
         {
@@ -121,6 +143,42 @@ public static class PvPRaceCommands
         protected override void OnTargetCancel(Mobile from, TargetCancelType cancel)
         {
             from.SendMessage(0x22, "Операция отменена.");
+        }
+    }
+
+    private sealed class SetPvPRaceTarget : Target
+    {
+        private readonly string _raceKey;
+        private readonly int _level;
+
+        public SetPvPRaceTarget(string raceKey, int level) : base(12, false, TargetFlags.None)
+        {
+            _raceKey = raceKey;
+            _level = level;
+        }
+
+        protected override void OnTarget(Mobile from, object targeted)
+        {
+            var pm = targeted as PlayerMobile;
+            if (pm == null)
+            {
+                from.SendMessage(0x22, "Target must be a player.");
+                return;
+            }
+
+            var st = RaceStateStore.GetOrCreate(pm.Serial);
+            st.RaceKey = _raceKey;
+            st.Level = _level;
+            RaceStateStore.Save();
+
+            var levelName = RaceRegistry.GetLevelName(_raceKey, _level);
+            from.SendMessage(0x44, $"Set {pm.Name} to {_raceKey} level {_level} ({levelName}).");
+            pm.SendMessage(0x35, $"Your PvP race is now: {levelName}");
+        }
+
+        protected override void OnTargetCancel(Mobile from, TargetCancelType cancel)
+        {
+            from.SendMessage(0x22, "Cancelled.");
         }
     }
 }

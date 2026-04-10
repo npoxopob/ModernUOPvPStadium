@@ -1,6 +1,7 @@
 using System;
 using Server;
 using Server.Mobiles;
+using PvPStadium.Items.Vampire.Jewelry;
 
 namespace PvPStadium.Mechanics;
 
@@ -34,5 +35,17 @@ public static class DamageHooks
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Applies BloodAmulet damage cap after all other damage calculations.
+    /// Called via reflection from PlayerMobile.Damage().
+    /// </summary>
+    public static int PvPStadium_ApplyDamageCap(Mobile target, Mobile from, int amount)
+    {
+        // Berserker fury accumulation: gain fury equal to damage taken
+        FurySystem.OnDamageTaken(target, amount);
+
+        return BloodAmulet.ApplyDamageCap(target, from, amount);
     }
 }

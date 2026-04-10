@@ -1,7 +1,7 @@
 {
   "1": {
     "RaceIndex": null,
-    "RaceKey": "necromancer",
+    "RaceKey": "vampire",
     "Level": 4,
     "NormalizedDone": true,
     "LastLifeDrainAtTicks": 0,
@@ -11,7 +11,7 @@
   },
   "4": {
     "RaceIndex": null,
-    "RaceKey": "vampire",
+    "RaceKey": "necromancer",
     "Level": 4,
     "NormalizedDone": true,
     "LastLifeDrainAtTicks": 639068384545409673,
@@ -19,10 +19,20 @@
     "HolyAuraActiveUntilTicks": 0,
     "LastHolyAuraAtTicks": 0
   },
+  "1706": {
+    "RaceIndex": null,
+    "RaceKey": "amazon",
+    "Level": 4,
+    "NormalizedDone": false,
+    "LastLifeDrainAtTicks": 0,
+    "HasLifeDrainAbility": false,
+    "HolyAuraActiveUntilTicks": 0,
+    "LastHolyAuraAtTicks": 0
+  },
   "1126": {
     "RaceIndex": null,
-    "RaceKey": "vampire",
-    "Level": 3,
+    "RaceKey": "berserker",
+    "Level": 4,
     "NormalizedDone": true,
     "LastLifeDrainAtTicks": 639064990998535533,
     "HasLifeDrainAbility": true,
@@ -44,6 +54,16 @@
     "RaceKey": "paladin",
     "Level": 4,
     "NormalizedDone": true,
+    "LastLifeDrainAtTicks": 0,
+    "HasLifeDrainAbility": false,
+    "HolyAuraActiveUntilTicks": 0,
+    "LastHolyAuraAtTicks": 0
+  },
+  "1696": {
+    "RaceIndex": null,
+    "RaceKey": "paladin",
+    "Level": 4,
+    "NormalizedDone": false,
     "LastLifeDrainAtTicks": 0,
     "HasLifeDrainAbility": false,
     "HolyAuraActiveUntilTicks": 0,

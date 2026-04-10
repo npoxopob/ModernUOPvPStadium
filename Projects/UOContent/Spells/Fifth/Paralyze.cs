@@ -71,6 +71,27 @@ namespace Server.Spells.Fifth
                     duration = 120;
                 }
 
+                // PvP Stadium: paladin ring paralyze resist/reflect hook (via reflection)
+                try
+                {
+                    var hookType = Server.AssemblyHandler.FindTypeByFullName("PvPStadium.Mechanics.ParalyzeHooks");
+                    if (hookType != null)
+                    {
+                        var mi = hookType.GetMethod("PvPStadium_OnParalyze",
+                            System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                        if (mi != null)
+                        {
+                            var blocked = mi.Invoke(null, new object[] { m, Caster });
+                            if (blocked is true)
+                            {
+                                HarmfulSpell(m);
+                                return;
+                            }
+                        }
+                    }
+                }
+                catch { /* fail-safe: apply paralyze normally */ }
+
                 m.Paralyze(TimeSpan.FromSeconds(duration));
 
                 m.PlaySound(0x204);

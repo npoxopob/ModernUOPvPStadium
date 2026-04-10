@@ -29,6 +29,27 @@ namespace Server.Spells.First
 
                 SpellHelper.CheckReflect((int)Circle, Caster, ref m);
 
+                // PvP Stadium: berserker kilt Weaken immunity (via reflection)
+                try
+                {
+                    var hookType = Server.AssemblyHandler.FindTypeByFullName("PvPStadium.Mechanics.SpellHooks");
+                    if (hookType != null)
+                    {
+                        var mi = hookType.GetMethod("PvPStadium_OnWeaken",
+                            System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                        if (mi != null)
+                        {
+                            var blocked = mi.Invoke(null, new object[] { m, Caster });
+                            if (blocked is true)
+                            {
+                                HarmfulSpell(m);
+                                return;
+                            }
+                        }
+                    }
+                }
+                catch { /* fail-safe */ }
+
                 var length = SpellHelper.GetDuration(Caster, m);
                 SpellHelper.AddStatCurse(Caster, m, StatType.Str, length, false);
 

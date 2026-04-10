@@ -39,7 +39,8 @@ public static class RaceCommands
         {
             if (e.Arguments.Length < 1)
             {
-                e.Mobile.SendMessage("Usage: SetRace <Human|Elf|Gargoyle>");
+                e.Mobile.SendMessage("Usage: [SetRace <Human|Elf|Gargoyle>");
+                e.Mobile.SendMessage("For PvP races use: [SetPvPRace <vampire|paladin|...> <1-4>");
                 return;
             }
             if (e.Mobile is not PlayerMobile pm)
@@ -49,7 +50,7 @@ public static class RaceCommands
             }
             if (!Race.TryParse(e.Arguments[0], null, out var race) || race == null)
             {
-                e.Mobile.SendMessage("Unknown race.");
+                e.Mobile.SendMessage("Unknown UO race. For PvP races use: [SetPvPRace <key> <level>");
                 return;
             }
             RaceService.Assign(pm, race);

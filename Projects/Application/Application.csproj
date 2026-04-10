@@ -27,5 +27,8 @@
         <ProjectReference Include="..\UOContent\UOContent.csproj" Private="false" PrivateAssets="All" IncludeAssets="None">
             <IncludeInPackage>false</IncludeInPackage>
         </ProjectReference>
+        <ProjectReference Include="..\PvPStadium\PvPStadium.csproj" Private="false" PrivateAssets="All" IncludeAssets="None">
+            <IncludeInPackage>false</IncludeInPackage>
+        </ProjectReference>
     </ItemGroup>
 </Project>

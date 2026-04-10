@@ -146,7 +146,7 @@ public abstract class Race : ISpanParsable<Race>
         for (var i = 0; i < Races.Length; ++i)
         {
             var race = Races[i];
-            if (s.InsensitiveEquals(race.Name) || s.InsensitiveEquals(race.PluralName))
+            if (race != null && (s.InsensitiveEquals(race.Name) || s.InsensitiveEquals(race.PluralName)))
             {
                 result = race;
                 return true;

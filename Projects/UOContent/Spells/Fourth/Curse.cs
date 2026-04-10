@@ -94,6 +94,27 @@ namespace Server.Spells.Fourth
 
                 SpellHelper.CheckReflect((int)Circle, Caster, ref m);
 
+                // PvP Stadium: berserker kilt Curse immunity (via reflection)
+                try
+                {
+                    var hookType = Server.AssemblyHandler.FindTypeByFullName("PvPStadium.Mechanics.SpellHooks");
+                    if (hookType != null)
+                    {
+                        var mi = hookType.GetMethod("PvPStadium_OnCurse",
+                            System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                        if (mi != null)
+                        {
+                            var blocked = mi.Invoke(null, new object[] { m, Caster });
+                            if (blocked is true)
+                            {
+                                HarmfulSpell(m);
+                                return;
+                            }
+                        }
+                    }
+                }
+                catch { /* fail-safe */ }
+
                 if (DoCurse(Caster, m))
                 {
                     HarmfulSpell(m);

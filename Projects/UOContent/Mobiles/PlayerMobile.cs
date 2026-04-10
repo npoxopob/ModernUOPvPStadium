@@ -2871,7 +2871,33 @@ namespace Server.Mobiles
                 }
             }
 
-            base.Damage((int)(amount * damageBonus), from, informMount);
+            amount = (int)(amount * damageBonus);
+
+            // PvP Stadium: BloodAmulet damage cap (via reflection to avoid hard dependency)
+            try
+            {
+                var capType = Server.AssemblyHandler.FindTypeByFullName("PvPStadium.Mechanics.DamageHooks");
+                if (capType != null)
+                {
+                    var capMethod = capType.GetMethod("PvPStadium_ApplyDamageCap",
+                        System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    if (capMethod != null)
+                    {
+                        var capped = capMethod.Invoke(null, new object[] { this, from, amount });
+                        if (capped is int cappedAmount)
+                        {
+                            amount = cappedAmount;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = Server.Logging.LogFactory.GetLogger(typeof(PlayerMobile));
+                logger.Error(ex, "[PvPStadium] Error in ApplyDamageCap hook: {Message}", ex.Message);
+            }
+
+            base.Damage(amount, from, informMount);
 
             // If the blood oath caster will die then damage is not reflected back to the attacker
             if (hasBloodOath && Alive && !Deleted && !IsDeadBondedPet)
@@ -4148,11 +4174,60 @@ namespace Server.Mobiles
                 timer.From = from;
             }
 
+            // PvP Stadium: vampire shroud poison reflect (via reflection)
+            if (from != null && result == ApplyPoisonResult.Poisoned)
+            {
+                try
+                {
+                    var hookType = Server.AssemblyHandler.FindTypeByFullName("PvPStadium.Mechanics.PoisonHooks");
+                    if (hookType != null)
+                    {
+                        var mi = hookType.GetMethod("PvPStadium_OnPoisonApplied",
+                            System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                        if (mi != null)
+                        {
+                            mi.Invoke(null, new object[] { this, from, poison });
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var logger = Server.Logging.LogFactory.GetLogger(typeof(PlayerMobile));
+                    logger.Error(ex, "[PvPStadium] Error in OnPoisonApplied hook: {Message}", ex.Message);
+                }
+            }
+
             return result;
         }
 
-        public override bool CheckPoisonImmunity(Mobile from, Poison poison) =>
-            Young && (DuelContext?.Started != true || DuelContext.Finished) || base.CheckPoisonImmunity(from, poison);
+        public override bool CheckPoisonImmunity(Mobile from, Poison poison)
+        {
+            // PvP Stadium: vampire shroud poison immunity (via reflection)
+            try
+            {
+                var hookType = Server.AssemblyHandler.FindTypeByFullName("PvPStadium.Mechanics.PoisonHooks");
+                if (hookType != null)
+                {
+                    var mi = hookType.GetMethod("PvPStadium_CheckPoisonImmunity",
+                        System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    if (mi != null)
+                    {
+                        var result = mi.Invoke(null, new object[] { this, from, poison });
+                        if (result is true)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = Server.Logging.LogFactory.GetLogger(typeof(PlayerMobile));
+                logger.Error(ex, "[PvPStadium] Error in CheckPoisonImmunity hook: {Message}", ex.Message);
+            }
+
+            return Young && (DuelContext?.Started != true || DuelContext.Finished) || base.CheckPoisonImmunity(from, poison);
+        }
 
         public override void OnPoisonImmunity(Mobile from, Poison poison)
         {
