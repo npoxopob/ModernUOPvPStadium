@@ -11,7 +11,7 @@
   },
   "4": {
     "RaceIndex": null,
-    "RaceKey": "necromancer",
+    "RaceKey": "human",
     "Level": 4,
     "NormalizedDone": true,
     "LastLifeDrainAtTicks": 639068384545409673,
@@ -21,7 +21,7 @@
   },
   "1706": {
     "RaceIndex": null,
-    "RaceKey": "amazon",
+    "RaceKey": "necromancer",
     "Level": 4,
     "NormalizedDone": false,
     "LastLifeDrainAtTicks": 0,
@@ -62,6 +62,16 @@
   "1696": {
     "RaceIndex": null,
     "RaceKey": "paladin",
+    "Level": 4,
+    "NormalizedDone": false,
+    "LastLifeDrainAtTicks": 0,
+    "HasLifeDrainAbility": false,
+    "HolyAuraActiveUntilTicks": 0,
+    "LastHolyAuraAtTicks": 0
+  },
+  "1697": {
+    "RaceIndex": null,
+    "RaceKey": "human",
     "Level": 4,
     "NormalizedDone": false,
     "LastLifeDrainAtTicks": 0,

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PvP Stadium - Races Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0f;
+            color: #d0d0d0;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #e0c070;
+            margin: 30px 0;
+            text-shadow: 0 0 20px rgba(224,192,112,0.3);
+        }
+        h2 {
+            font-size: 1.8em;
+            margin: 10px 0 15px;
+            border-bottom: 2px solid;
+            padding-bottom: 8px;
+        }
+        h3 { font-size: 1.2em; margin: 12px 0 6px; color: #ccc; }
+
+        /* Race Cards */
+        .race-card {
+            background: #14141f;
+            border: 1px solid #2a2a3a;
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .race-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+        }
+
+        /* Race colors */
+        .vampire { border-color: #8b2020; }
+        .vampire::before { background: linear-gradient(90deg, #8b2020, #cc3333); }
+        .vampire h2 { color: #cc3333; border-color: #8b2020; }
+
+        .paladin { border-color: #c0a030; }
+        .paladin::before { background: linear-gradient(90deg, #c0a030, #f0d060); }
+        .paladin h2 { color: #f0d060; border-color: #c0a030; }
+
+        .berserker { border-color: #b06020; }
+        .berserker::before { background: linear-gradient(90deg, #b06020, #e08030); }
+        .berserker h2 { color: #e08030; border-color: #b06020; }
+
+        .amazon { border-color: #208040; }
+        .amazon::before { background: linear-gradient(90deg, #208040, #40c060); }
+        .amazon h2 { color: #40c060; border-color: #208040; }
+
+        .necromancer { border-color: #5030a0; }
+        .necromancer::before { background: linear-gradient(90deg, #5030a0, #8060d0); }
+        .necromancer h2 { color: #8060d0; border-color: #5030a0; }
+
+        .human { border-color: #607080; }
+        .human::before { background: linear-gradient(90deg, #607080, #90a8c0); }
+        .human h2 { color: #90a8c0; border-color: #607080; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.95em;
+        }
+        th {
+            background: #1a1a2a;
+            color: #e0c070;
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 2px solid #333;
+        }
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #222;
+        }
+        tr:hover td { background: #1a1a25; }
+
+        .level-name { font-weight: bold; }
+        .lv1 .level-name { color: #888; }
+        .lv2 .level-name { color: #aaa; }
+        .lv3 .level-name { color: #ddd; }
+        .lv4 .level-name { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin: 1px 2px;
+        }
+        .tag-weapon { background: #2a1a1a; color: #e08080; }
+        .tag-armor { background: #1a1a2a; color: #8080e0; }
+        .tag-jewelry { background: #2a2a1a; color: #d0d060; }
+        .tag-consumable { background: #1a2a1a; color: #60d060; }
+        .tag-special { background: #2a1a2a; color: #d060d0; }
+
+        /* Counter section */
+        .counter-section {
+            background: #0f0f18;
+            border: 1px solid #2a2a3a;
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin: 40px 0;
+        }
+        .counter-section h2 {
+            color: #e0c070;
+            border-color: #e0c070;
+        }
+
+        .matchup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .matchup {
+            background: #14141f;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .matchup-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        .matchup-arrow { color: #e0c070; font-size: 1.2em; }
+        .strong { color: #50d050; }
+        .weak { color: #d05050; }
+        .neutral { color: #a0a0a0; }
+
+        /* Counter matrix */
+        .matrix-table th, .matrix-table td {
+            text-align: center;
+            padding: 10px;
+            min-width: 80px;
+        }
+        .matrix-table .win { background: #1a2a1a; color: #50d050; font-weight: bold; }
+        .matrix-table .lose { background: #2a1a1a; color: #d05050; font-weight: bold; }
+        .matrix-table .even { background: #1a1a1a; color: #a0a0a0; }
+        .matrix-table .self { background: #111; color: #555; }
+        .matrix-table .slight-win { background: #1a251a; color: #80c080; }
+        .matrix-table .slight-lose { background: #251a1a; color: #c08080; }
+
+        .desc { color: #999; font-style: italic; margin: 8px 0; }
+        .mechanic { color: #b0b0d0; }
+        .highlight { color: #e0c070; font-weight: bold; }
+
+        /* Summary boxes */
+        .summary-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .summary-box {
+            background: #1a1a25;
+            border-radius: 6px;
+            padding: 10px 14px;
+        }
+        .summary-box .label { color: #888; font-size: 0.85em; }
+        .summary-box .value { font-weight: bold; margin-top: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>PvP Stadium - Races Guide</h1>
+
+<!-- ==================== VAMPIRE ==================== -->
+<div class="race-card vampire">
+    <h2>Vampire</h2>
+    <p class="desc">Dark warriors who drain the life force of their enemies. Chaos class — natural enemy of Paladins.</p>
+
+    <div class="summary-row">
+        <div class="summary-box">
+            <div class="label">Role</div>
+            <div class="value">Sustain DPS / Lifesteal</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Strong vs</div>
+            <div class="value strong">Amazon, Human</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Weak vs</div>
+            <div class="value weak">Paladin</div>
+        </div>
+    </div>
+
+    <h3>Items</h3>
+    <span class="tag tag-weapon">Claws (Swords)</span>
+    <span class="tag tag-weapon">Sickles (Fencing)</span>
+    <span class="tag tag-weapon">Hands (Ranged)</span>
+    <span class="tag tag-armor">Shrouds (Clothing)</span>
+    <span class="tag tag-jewelry">Blood Amulet</span>
+    <span class="tag tag-consumable">Bottle of Blood</span>
+
+    <h3>Levels</h3>
+    <table>
+        <tr><th>Lv</th><th>Name</th><th>Weapons</th><th>Special</th></tr>
+        <tr class="lv1"><td>1</td><td class="level-name">Ghoul</td><td>Ghoul Claw (13-16)</td><td>No procs</td></tr>
+        <tr class="lv2"><td>2</td><td class="level-name">Vampire</td><td>Vampire Claw (14-17), Sickles, Hands</td><td>Lifesteal, Bleed DoT, Fire DoT. Blood Amulet (damage cap)</td></tr>
+        <tr class="lv3"><td>3</td><td class="level-name">Vampire Knight</td><td>Nosferatu Claw (15-19)</td><td>Stronger procs. Poison resist shroud</td></tr>
+        <tr class="lv4"><td>4</td><td class="level-name">Nosferatu Vampire</td><td>VK Claw (18-22)</td><td>Best procs. Poison reflect shroud. Full kit</td></tr>
+    </table>
+
+    <h3>Key Mechanics</h3>
+    <ul>
+        <li><span class="mechanic">Lifesteal (Claws)</span> — heals attacker for percentage of damage dealt</li>
+        <li><span class="mechanic">Bleed DoT (Sickles)</span> — periodic physical damage over time</li>
+        <li><span class="mechanic">Fire DoT (Hands)</span> — ranged ignition, fire damage ticks</li>
+        <li><span class="mechanic">Poison Resist/Reflect (Shrouds)</span> — blocks or reflects poison spells</li>
+        <li><span class="mechanic">Damage Cap (Blood Amulet)</span> — limits max incoming damage per hit</li>
+    </ul>
+</div>
+
+<!-- ==================== PALADIN ==================== -->
+<div class="race-card paladin">
+    <h2>Paladin</h2>
+    <p class="desc">Holy knights of the Light. Deal bonus damage to Chaos classes (Vampire, Necromancer).</p>
+
+    <div class="summary-row">
+        <div class="summary-box">
+            <div class="label">Role</div>
+            <div class="value">Anti-Chaos Burst / Support</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Strong vs</div>
+            <div class="value strong">Vampire, Necromancer</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Weak vs</div>
+            <div class="value weak">Amazon, Berserker</div>
+        </div>
+    </div>
+
+    <h3>Items</h3>
+    <span class="tag tag-weapon">Swords (Swordsmanship)</span>
+    <span class="tag tag-weapon">Maces (Macing)</span>
+    <span class="tag tag-jewelry">Holy Ring / Ring of Heaven</span>
+    <span class="tag tag-consumable">Holy Essence</span>
+
+    <h3>Levels</h3>
+    <table>
+        <tr><th>Lv</th><th>Name</th><th>Weapons</th><th>Special</th></tr>
+        <tr class="lv1"><td>1</td><td class="level-name">Follower of Light</td><td>Blade of Light (13-16), Blessed Mace (14-17)</td><td>No procs</td></tr>
+        <tr class="lv2"><td>2</td><td class="level-name">Knight of Justice</td><td>Blade of Justice, Mace of Disruption</td><td>Holy damage 8-12, +5 vs Chaos, 10% heal. Stam drain, 25% BoneBreak. Holy Ring (33% paralyze resist). Holy Essence</td></tr>
+        <tr class="lv3"><td>3</td><td class="level-name">Paladin</td><td>Anger of Heaven, Holy Bonebreaker</td><td>Holy 10-15, +8 vs Chaos. 33% BoneBreak. Ring of Heaven (33% paralyze reflect)</td></tr>
+        <tr class="lv4"><td>4</td><td class="level-name">Guardian of Heaven</td><td>Blade of Fate (17-21), Mace of Retribution (18-22)</td><td>Holy 12-18, +11 vs Chaos. 40% BoneBreak 12s</td></tr>
+    </table>
+
+    <h3>Key Mechanics</h3>
+    <ul>
+        <li><span class="mechanic">Holy Damage (Swords)</span> — bonus fire damage proc, x1.5 when weapon is blessed</li>
+        <li><span class="mechanic">Chaos Bonus</span> — flat extra damage vs Vampire and Necromancer</li>
+        <li><span class="mechanic">Heal on Hit (Swords)</span> — heals 10% of damage vs non-chaos targets</li>
+        <li><span class="mechanic">BoneBreak (Maces)</span> — DEX + Parry debuff for duration</li>
+        <li><span class="mechanic">Stamina Drain (Maces)</span> — drains target's stamina on hit</li>
+        <li><span class="mechanic">Holy Essence</span> — bless weapons (+50% holy vs chaos) or direct 20-25 holy damage to chaos players</li>
+    </ul>
+</div>
+
+<!-- ==================== BERSERKER ==================== -->
+<div class="race-card berserker">
+    <h2>Berserker</h2>
+    <p class="desc">Savage warriors who grow stronger from pain. Fury accumulates from damage taken.</p>
+
+    <div class="summary-row">
+        <div class="summary-box">
+            <div class="label">Role</div>
+            <div class="value">Tank / Anti-Mage</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Strong vs</div>
+            <div class="value strong">Necromancer, Paladin</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Weak vs</div>
+            <div class="value weak">Amazon, Vampire</div>
+        </div>
+    </div>
+
+    <h3>Items</h3>
+    <span class="tag tag-weapon">Axes (Swordsmanship)</span>
+    <span class="tag tag-armor">Masks (HP Regen)</span>
+    <span class="tag tag-armor">Kilts (DEX + Spell Immunity)</span>
+    <span class="tag tag-consumable">Restoration</span>
+
+    <h3>Levels</h3>
+    <table>
+        <tr><th>Lv</th><th>Name</th><th>Weapons</th><th>Special</th></tr>
+        <tr class="lv1"><td>1</td><td class="level-name">Adept of Might</td><td>Adept Axe (13-16)</td><td>Mask (regen 3-6)</td></tr>
+        <tr class="lv2"><td>2</td><td class="level-name">Barbarian</td><td>Barbarian Axe (14-17)</td><td>Mask (regen 5-9). Kilt (+5 DEX, Weaken immune). Restoration</td></tr>
+        <tr class="lv3"><td>3</td><td class="level-name">Berserker</td><td>Ancient Avenger (15-19)</td><td>Mask (regen 6-12). Ancient Kilt (+10 DEX, Weaken immune). Fury bonus damage</td></tr>
+        <tr class="lv4"><td>4</td><td class="level-name">Child of Ragnar</td><td>Rage of Ancestors (18-22)</td><td>Mask (regen 6-14). Kilt of Ancestors (+10 DEX, Weaken + Curse immune). Max fury = 300</td></tr>
+    </table>
+
+    <h3>Key Mechanics</h3>
+    <ul>
+        <li><span class="mechanic">Fury System</span> — accumulates from damage taken. At max fury: 10s paralyze immunity</li>
+        <li><span class="mechanic">Fury Bonus Damage (Axes)</span> — consumes fury for extra damage (fury/20)</li>
+        <li><span class="mechanic">HP Regen (Masks)</span> — passive heal every 3s (requires INT &ge; 70)</li>
+        <li><span class="mechanic">Spell Immunity (Kilts)</span> — immune to Weaken (Lv2+), immune to Curse (Lv4)</li>
+        <li><span class="mechanic">Restoration</span> — consumable: instant HP + Stamina heal, 4s cooldown</li>
+    </ul>
+</div>
+
+<!-- ==================== AMAZON ==================== -->
+<div class="race-card amazon">
+    <h2>Amazon</h2>
+    <p class="desc">Agile huntresses with deadly precision. Masters of crowd control and debuffs.</p>
+
+    <div class="summary-row">
+        <div class="summary-box">
+            <div class="label">Role</div>
+            <div class="value">CC / Debuffer / Ranged</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Strong vs</div>
+            <div class="value strong">Paladin, Berserker</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Weak vs</div>
+            <div class="value weak">Vampire, Necromancer</div>
+        </div>
+    </div>
+
+    <h3>Items</h3>
+    <span class="tag tag-weapon">Spears (Fencing)</span>
+    <span class="tag tag-weapon">Krysses (Fencing)</span>
+    <span class="tag tag-weapon">Bows (Archery)</span>
+    <span class="tag tag-armor">Skirts (DEX + Spell Reflect)</span>
+    <span class="tag tag-jewelry">Earrings (+10 STR)</span>
+
+    <h3>Levels</h3>
+    <table>
+        <tr><th>Lv</th><th>Name</th><th>Weapons</th><th>Special</th></tr>
+        <tr class="lv1"><td>1</td><td class="level-name">Child of Nature</td><td>Amazonian Spear (12-14), Kryss (12-14), Bow (15-19)</td><td>25% paralyze, 50% weaken. Skirt (+10 DEX, Clumsy resist)</td></tr>
+        <tr class="lv2"><td>2</td><td class="level-name">Amazon Girl</td><td>Spear of Paralyze Root, Kryss of Illness, 2 Bows</td><td>33% paralyze, poison+weaken. Clumsy reflect skirt. Earrings</td></tr>
+        <tr class="lv3"><td>3</td><td class="level-name">Amazon</td><td>Superior weapons (15-18 / 17-21)</td><td>50% procs. Deadly poison. Clumsy + Weaken reflect. +20% crit range</td></tr>
+        <tr class="lv4"><td>4</td><td class="level-name">Amazon Queen</td><td>Elite weapons (18-22 / 20-24)</td><td>60% procs. Lethal poison. Elite Skirt (+15 DEX). +25% crit range</td></tr>
+    </table>
+
+    <h3>Key Mechanics</h3>
+    <ul>
+        <li><span class="mechanic">Paralyze on Hit (Spears, Bows)</span> — freezes target for 3-5s</li>
+        <li><span class="mechanic">Poison + STR Weaken (Krysses)</span> — poison DoT + reduces STR by 18-50 for 10-18s</li>
+        <li><span class="mechanic">Distance Critical (Bows)</span> — +15-25% damage at optimal range (6 tiles)</li>
+        <li><span class="mechanic">Clumsy/Weaken Reflect (Skirts)</span> — reflects debuff spells back to caster</li>
+        <li><span class="mechanic">Triple weapon choice</span> — spears (paralyze), krysses (poison/debuff), bows (ranged crit)</li>
+    </ul>
+</div>
+
+<!-- ==================== NECROMANCER ==================== -->
+<div class="race-card necromancer">
+    <h2>Necromancer</h2>
+    <p class="desc">Dark mages who command death. Chaos class — natural enemy of Paladins. Drains mind and mana.</p>
+
+    <div class="summary-row">
+        <div class="summary-box">
+            <div class="label">Role</div>
+            <div class="value">Anti-Mage / Drain / Sustain</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Strong vs</div>
+            <div class="value strong">Amazon, Human</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Weak vs</div>
+            <div class="value weak">Paladin, Berserker</div>
+        </div>
+    </div>
+
+    <h3>Items</h3>
+    <span class="tag tag-weapon">Staves (Macing)</span>
+    <span class="tag tag-weapon">Daggers (Fencing)</span>
+    <span class="tag tag-armor">Robes (INT + Holy Resist)</span>
+    <span class="tag tag-jewelry">Necro Ring (FC + SD + Paralyze)</span>
+    <span class="tag tag-consumable">Dark Essence</span>
+
+    <h3>Levels</h3>
+    <table>
+        <tr><th>Lv</th><th>Name</th><th>Weapons</th><th>Special</th></tr>
+        <tr class="lv1"><td>1</td><td class="level-name">Damned Soul</td><td>Apprentice Staff (13-16), Dagger (12-14)</td><td>Robe (+10 INT). Ring (+1 FC)</td></tr>
+        <tr class="lv2"><td>2</td><td class="level-name">Dark Prophet</td><td>Staff of Decay (14-17), Dagger of Soul Drain (13-15)</td><td>25% Curse of Decay. 25% Soul Drain. +5 vs Paladin. Holy resist 25%. Dark Essence</td></tr>
+        <tr class="lv3"><td>3</td><td class="level-name">Necromancer</td><td>Staff of Damnation (15-19), Dagger of Torment (15-18)</td><td>33% procs. Poison dagger. +10% Spell Damage. Paralyze resist ring</td></tr>
+        <tr class="lv4"><td>4</td><td class="level-name">High Priest of Death</td><td>Staff of Oblivion (18-22), Dagger of Annihilation (18-22)</td><td>40% procs. Deadly poison. +20 INT. Holy resist 60%. +2 FC. Paralyze reflect ring</td></tr>
+    </table>
+
+    <h3>Key Mechanics</h3>
+    <ul>
+        <li><span class="mechanic">Curse of Decay (Staves)</span> — INT debuff (-15 to -40) + mana drain (10-35)</li>
+        <li><span class="mechanic">Soul Drain (Daggers)</span> — lifesteal: steals HP from target, heals attacker</li>
+        <li><span class="mechanic">Empowerment (Dark Essence)</span> — +50% Soul Drain for 8-10 charges</li>
+        <li><span class="mechanic">Holy Damage Reduction (Robes)</span> — absorbs 25-60% of paladin bonus holy damage</li>
+        <li><span class="mechanic">Light Bonus (Staves)</span> — +5 to +11 flat damage vs Paladins</li>
+    </ul>
+</div>
+
+<!-- ==================== HUMAN ==================== -->
+<div class="race-card human">
+    <h2>Human</h2>
+    <p class="desc">Versatile warriors who customize their weapons with crystal sockets. Jack of all trades.</p>
+
+    <div class="summary-row">
+        <div class="summary-box">
+            <div class="label">Role</div>
+            <div class="value">Versatile / Adaptive</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Strong vs</div>
+            <div class="value strong">Berserker</div>
+        </div>
+        <div class="summary-box">
+            <div class="label">Weak vs</div>
+            <div class="value weak">Vampire, Necromancer</div>
+        </div>
+    </div>
+
+    <h3>Items</h3>
+    <span class="tag tag-weapon">Swords with Sockets (Swordsmanship)</span>
+    <span class="tag tag-armor">Shields (Phys Reflect)</span>
+    <span class="tag tag-armor">Cloaks (DEX + HP Regen)</span>
+    <span class="tag tag-jewelry">Ring (STR + DCI)</span>
+    <span class="tag tag-special">Crystals (Fire, Ice, Poison, Thunder, Life)</span>
+
+    <h3>Levels</h3>
+    <table>
+        <tr><th>Lv</th><th>Name</th><th>Sword</th><th>Sockets</th><th>Special</th></tr>
+        <tr class="lv1"><td>1</td><td class="level-name">Militia</td><td>Militia Sword (13-16)</td><td>1</td><td>Shield. Cloak (+5 DEX). Ring (+5 STR, +5% DCI)</td></tr>
+        <tr class="lv2"><td>2</td><td class="level-name">Veteran</td><td>Veteran Sword (14-17)</td><td>2</td><td>Shield (5% reflect). Cloak (+5 DEX, +2 HP regen). Ring (+5 STR, +10% DCI)</td></tr>
+        <tr class="lv3"><td>3</td><td class="level-name">Captain</td><td>Captain's Sword (15-19)</td><td>3</td><td>Shield (10% reflect). Cloak (+10 DEX, +3 HP regen). Ring (+10 STR, +10% DCI)</td></tr>
+        <tr class="lv4"><td>4</td><td class="level-name">Commander</td><td>Commander's Sword (18-22)</td><td>3</td><td>Shield (15% reflect). Cloak (+15 DEX, +5 HP regen). Ring (+10 STR, +15% DCI)</td></tr>
+    </table>
+
+    <h3>Crystal System</h3>
+    <table>
+        <tr><th>Crystal</th><th>Power 1</th><th>Power 2</th><th>Power 3</th></tr>
+        <tr><td style="color:#e08080">Fire</td><td>5 fire dmg</td><td>8 fire dmg</td><td>12 fire dmg</td></tr>
+        <tr><td style="color:#80b0e0">Ice</td><td>4 cold + 5 stam drain</td><td>6 cold + 10 stam drain</td><td>10 cold + 15 stam drain</td></tr>
+        <tr><td style="color:#60c060">Poison</td><td>33% Lesser</td><td>40% Regular</td><td>50% Greater</td></tr>
+        <tr><td style="color:#b0a0e0">Thunder</td><td>4 energy + 8 mana drain</td><td>7 energy + 15 mana drain</td><td>11 energy + 25 mana drain</td></tr>
+        <tr><td style="color:#e0c060">Life</td><td>4 HP lifesteal</td><td>7 HP lifesteal</td><td>10 HP lifesteal</td></tr>
+    </table>
+</div>
+
+<!-- ==================== COUNTER MATRIX ==================== -->
+<div class="counter-section">
+    <h2>Counter Matrix</h2>
+    <p class="desc">How each race performs against others. Based on built-in mechanics and item interactions.</p>
+
+    <table class="matrix-table">
+        <tr>
+            <th></th>
+            <th style="color:#cc3333">Vampire</th>
+            <th style="color:#f0d060">Paladin</th>
+            <th style="color:#e08030">Berserker</th>
+            <th style="color:#40c060">Amazon</th>
+            <th style="color:#8060d0">Necromancer</th>
+            <th style="color:#90a8c0">Human</th>
+        </tr>
+        <tr>
+            <th style="color:#cc3333">Vampire</th>
+            <td class="self">-</td>
+            <td class="lose">LOSE</td>
+            <td class="slight-win">+</td>
+            <td class="win">WIN</td>
+            <td class="even">EVEN</td>
+            <td class="win">WIN</td>
+        </tr>
+        <tr>
+            <th style="color:#f0d060">Paladin</th>
+            <td class="win">WIN</td>
+            <td class="self">-</td>
+            <td class="slight-lose">-</td>
+            <td class="lose">LOSE</td>
+            <td class="win">WIN</td>
+            <td class="even">EVEN</td>
+        </tr>
+        <tr>
+            <th style="color:#e08030">Berserker</th>
+            <td class="slight-lose">-</td>
+            <td class="slight-win">+</td>
+            <td class="self">-</td>
+            <td class="lose">LOSE</td>
+            <td class="win">WIN</td>
+            <td class="slight-lose">-</td>
+        </tr>
+        <tr>
+            <th style="color:#40c060">Amazon</th>
+            <td class="lose">LOSE</td>
+            <td class="win">WIN</td>
+            <td class="win">WIN</td>
+            <td class="self">-</td>
+            <td class="slight-lose">-</td>
+            <td class="even">EVEN</td>
+        </tr>
+        <tr>
+            <th style="color:#8060d0">Necromancer</th>
+            <td class="even">EVEN</td>
+            <td class="lose">LOSE</td>
+            <td class="lose">LOSE</td>
+            <td class="slight-win">+</td>
+            <td class="self">-</td>
+            <td class="win">WIN</td>
+        </tr>
+        <tr>
+            <th style="color:#90a8c0">Human</th>
+            <td class="lose">LOSE</td>
+            <td class="even">EVEN</td>
+            <td class="slight-win">+</td>
+            <td class="even">EVEN</td>
+            <td class="lose">LOSE</td>
+            <td class="self">-</td>
+        </tr>
+    </table>
+
+    <h3 style="margin-top: 25px;">Counter Explanations</h3>
+    <div class="matchup-grid">
+        <div class="matchup">
+            <div class="matchup-title"><span style="color:#f0d060">Paladin</span> <span class="matchup-arrow">&raquo;</span> <span style="color:#cc3333">Vampire</span> / <span style="color:#8060d0">Necromancer</span></div>
+            <p>Holy bonus damage (+5 to +11), Holy Essence direct damage, blessed weapon x1.5 multiplier. Chaos classes take significantly more damage from paladins.</p>
+        </div>
+        <div class="matchup">
+            <div class="matchup-title"><span style="color:#8060d0">Necromancer</span> <span class="matchup-arrow">&raquo;</span> <span style="color:#f0d060">Paladin</span> (partial)</div>
+            <p>Holy Damage Reduction (25-60%) on robes, Light Bonus damage (+5 to +11) on staves. But paladin's burst is still strong — necro can mitigate but not fully counter.</p>
+        </div>
+        <div class="matchup">
+            <div class="matchup-title"><span style="color:#40c060">Amazon</span> <span class="matchup-arrow">&raquo;</span> <span style="color:#f0d060">Paladin</span> / <span style="color:#e08030">Berserker</span></div>
+            <p>Paralyze locks prevent melee engagement. Poison + STR debuff cripples melee fighters. Distance critical from bows keeps Amazon safe. Berserker's spell immunity doesn't help vs weapon procs.</p>
+        </div>
+        <div class="matchup">
+            <div class="matchup-title"><span style="color:#cc3333">Vampire</span> <span class="matchup-arrow">&raquo;</span> <span style="color:#40c060">Amazon</span></div>
+            <p>Poison resist/reflect shroud neutralizes Amazon's poison krysses. Lifesteal sustain outlasts Amazon's burst. Blood Amulet caps incoming spike damage.</p>
+        </div>
+        <div class="matchup">
+            <div class="matchup-title"><span style="color:#e08030">Berserker</span> <span class="matchup-arrow">&raquo;</span> <span style="color:#8060d0">Necromancer</span></div>
+            <p>Weaken + Curse immunity blocks necro's debuffs. Fury paralyze immunity prevents control. HP regen masks sustain through Curse of Decay. High burst axes kill squishy necros fast.</p>
+        </div>
+        <div class="matchup">
+            <div class="matchup-title"><span style="color:#90a8c0">Human</span> — Adaptive</div>
+            <p>Crystal choice determines matchups. Thunder crystals drain necro mana. Life crystals sustain vs burst. Ice crystals slow melee. Shields reflect physical damage. Versatile but master of none.</p>
+        </div>
+    </div>
+
+    <h3 style="margin-top: 25px;">Balance Triangle</h3>
+    <p style="text-align:center; margin: 20px 0; font-size: 1.1em; line-height: 2;">
+        <span style="color:#f0d060">Paladin</span> beats <span style="color:#cc3333">Vampire</span> &amp; <span style="color:#8060d0">Necromancer</span><br>
+        <span style="color:#40c060">Amazon</span> beats <span style="color:#f0d060">Paladin</span> &amp; <span style="color:#e08030">Berserker</span><br>
+        <span style="color:#cc3333">Vampire</span> beats <span style="color:#40c060">Amazon</span> &amp; <span style="color:#90a8c0">Human</span><br>
+        <span style="color:#e08030">Berserker</span> beats <span style="color:#8060d0">Necromancer</span> &amp; <span style="color:#f0d060">Paladin</span><br>
+        <span style="color:#8060d0">Necromancer</span> beats <span style="color:#40c060">Amazon</span> &amp; <span style="color:#90a8c0">Human</span><br>
+        <span style="color:#90a8c0">Human</span> adapts — crystal choice shifts matchups
+    </p>
+</div>
+
+<p style="text-align:center; color:#555; margin: 40px 0; font-size: 0.9em;">
+    PvP Stadium &mdash; ModernUO &mdash; Generated 2026
+</p>
+
+</div>
+</body>
+</html>
