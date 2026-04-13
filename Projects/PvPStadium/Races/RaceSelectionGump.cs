@@ -18,7 +18,8 @@ internal class RaceSelectionGump : Gump
         ("berserker", 0x26, "Savage fighters fueled by rage.\nWeapons: Axes\nSpecial: Fury System, HP Regen, Weaken/Curse Immunity"),
         ("amazon", 0x3B2, "Agile huntresses with deadly precision.\nWeapons: Spears, Krysses, Bows\nSpecial: Paralyze, Poison, Distance Crit, Clumsy Reflect"),
         ("necromancer", 0x455, "Dark mages who command death itself.\nWeapons: Staves, Daggers\nSpecial: Curse of Decay, Soul Drain, Mana Drain, Holy Resist"),
-        ("human", 0x835, "Versatile warriors with customizable weapons.\nWeapons: Swords with Crystal Sockets\nSpecial: Fire/Ice/Poison/Thunder/Life Crystals, Shields")
+        ("human", 0x835, "Versatile warriors with customizable weapons.\nWeapons: Swords with Crystal Sockets\nSpecial: Fire/Ice/Poison/Thunder/Life Crystals, Shields"),
+        ("monk", 0x480, "Masters of martial arts fueled by Chi.\nWeapons: Staves, Fists (Macing)\nSpecial: Chi System, Counter Strike, Rapid Flurry, Evasion")
     };
 
     public RaceSelectionGump(PlayerMobile pm) : base(0, 0)
@@ -186,6 +187,11 @@ internal class RaceLevelGump : Gump
         ("human", 2) => "Sword with 2 sockets. Shield (5% reflect). Cloak (+HP regen).",
         ("human", 3) => "Sword with 3 sockets. Shield (10% reflect). Power 2 crystals.",
         ("human", 4) => "Best sword, 3 sockets. Shield (15% reflect). Power 3 crystals.",
+
+        ("monk", 1) => "Bamboo Staff, Apprentice Fists. Gi (+5 DEX). Prayer Beads.",
+        ("monk", 2) => "Counter Strike (25%). Flurry (20%). Dodge Magic 20%. Incense.",
+        ("monk", 3) => "Dragon Staff (+8 vs Berserker). Tiger Fists. 30% Dodge Magic.",
+        ("monk", 4) => "Celestial weapons. +15 DEX. 40% Dodge. Paralyze Immunity.",
 
         _ => ""
     };

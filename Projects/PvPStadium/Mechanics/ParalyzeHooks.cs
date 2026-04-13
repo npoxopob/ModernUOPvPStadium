@@ -2,6 +2,7 @@ using Server;
 using Server.Mobiles;
 using PvPStadium.Items.Paladin.Jewelry;
 using PvPStadium.Items.Necromancer.Jewelry;
+using PvPStadium.Items.Monk.Clothing;
 
 namespace PvPStadium.Mechanics;
 
@@ -22,6 +23,13 @@ public static class ParalyzeHooks
         if (FurySystem.HasFuryParalyzeImmunity(target))
         {
             target.SendMessage(0x26, "Your fury makes you immune to paralyze!");
+            return true;
+        }
+
+        // Monk Grandmaster Gi (level 4) — paralyze immunity
+        if (BaseMonkGi.HasParalyzeImmunity(target))
+        {
+            target.SendMessage(0x480, "Your inner peace makes you immune to paralyze!");
             return true;
         }
 

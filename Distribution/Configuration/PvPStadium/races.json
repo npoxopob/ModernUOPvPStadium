@@ -64,5 +64,16 @@
       { "Level": 3, "Name": "Captain" },
       { "Level": 4, "Name": "Commander" }
     ]
+  },
+  {
+    "Key": "monk",
+    "Display": "Monk Path",
+    "Enabled": true,
+    "Levels": [
+      { "Level": 1, "Name": "Disciple" },
+      { "Level": 2, "Name": "Acolyte" },
+      { "Level": 3, "Name": "Monk" },
+      { "Level": 4, "Name": "Grandmaster" }
+    ]
   }
 ]
