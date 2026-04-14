@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Server;
-using Server.Mobiles;
 
 namespace PvPStadium.Items.Monk;
 
 /// <summary>
-/// Chi (Ци) accumulation system for the Monk race.
+/// Chi accumulation system for the Monk race.
 /// Charges build on successful evasion (dodge), consumed on next attack.
 /// Each charge = +4 bonus damage. 5+ charges = Stun. 8+ = Knockback.
 /// Charges decay after 8 seconds without evasion.
@@ -32,10 +31,16 @@ public static class ChiSystem
 
     public static int GetCharges(Mobile m)
     {
-        if (!_states.TryGetValue(m.Serial, out var st))
+        if (m == null)
+        {
             return 0;
+        }
 
-        // Check decay
+        if (!_states.TryGetValue(m.Serial, out var st))
+        {
+            return 0;
+        }
+
         if (DateTime.UtcNow - st.LastGainTime > TimeSpan.FromSeconds(DecaySeconds))
         {
             _states.Remove(m.Serial);
@@ -54,7 +59,6 @@ public static class ChiSystem
             _states[m.Serial] = st;
         }
 
-        // Check decay first
         if (DateTime.UtcNow - st.LastGainTime > TimeSpan.FromSeconds(DecaySeconds))
         {
             st.Charges = 0;
@@ -77,7 +81,9 @@ public static class ChiSystem
     {
         var charges = GetCharges(m);
         if (charges <= 0)
+        {
             return (0, false, false);
+        }
 
         _states.Remove(m.Serial);
 
@@ -89,7 +95,10 @@ public static class ChiSystem
     }
 
     /// <summary>Clear all Chi state (on logout/death).</summary>
-    public static void Clear(Mobile m) => _states.Remove(m.Serial);
+    public static void Clear(Mobile m)
+    {
+        _states.Remove(m.Serial);
+    }
 
     private class ChiState
     {

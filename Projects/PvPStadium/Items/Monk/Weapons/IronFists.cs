@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Monk.Weapons;
 
 /// <summary>Level 2 monk fists. 20% Rapid Flurry (3 hits).</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class IronFists : BaseMonkFists
 {
     public override int RequiredMonkLevel => 2;
@@ -26,11 +26,10 @@ public partial class IronFists : BaseMonkFists
     public override int InitMaxHits => 255;
 
     [Constructible]
-    public IronFists() : base(0x13C6)
+    public IronFists() : base(0x13B9)
     {
         Name = "Iron Fists";
         Hue = 0x08AB;
         Weight = 1.0;
-        Layer = Layer.OneHanded;
     }
 }

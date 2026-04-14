@@ -1,4 +1,3 @@
-using System;
 using ModernUO.Serialization;
 using Server;
 using Server.Items;
@@ -12,7 +11,7 @@ namespace PvPStadium.Items.Monk.Jewelry;
 /// Level 3: +10 DEX, Chi max 7, 30% Dodge Magic
 /// Level 4: +12 DEX, Chi max 10, 40% Dodge Magic, +3 HP regen
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class MonkBeads : BaseBracelet
 {
     [SerializableField(0)]
@@ -24,10 +23,12 @@ public partial class MonkBeads : BaseBracelet
     private int _dodgeMagicChance; // 0-100
 
     [Constructible]
-    public MonkBeads() : this(1) { }
+    public MonkBeads() : this(1)
+    {
+    }
 
     [Constructible]
-    public MonkBeads(int level) : base(0x1086) // bracelet graphic
+    public MonkBeads(int level) : base(0x1086)
     {
         _requiredLevel = level;
         LootType = LootType.Blessed;
@@ -51,7 +52,7 @@ public partial class MonkBeads : BaseBracelet
                 Attributes.BonusDex = 10;
                 _dodgeMagicChance = 30;
                 break;
-            default: // 4+
+            default:
                 Name = "Celestial Beads";
                 Hue = 0x0A09;
                 Attributes.BonusDex = 12;
@@ -82,7 +83,9 @@ public partial class MonkBeads : BaseBracelet
     {
         var beads = target.FindItemOnLayer<MonkBeads>(Layer.Bracelet);
         if (beads == null || beads._dodgeMagicChance <= 0)
+        {
             return false;
+        }
 
         if (Utility.Random(100) < beads._dodgeMagicChance)
         {
@@ -95,16 +98,16 @@ public partial class MonkBeads : BaseBracelet
         return false;
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         var maxChi = MonkItemHelper.MaxChi(_requiredLevel);
-        list.Add(1042971, $"Max Chi: {maxChi}");
+        list.Add(1042971, $"{"Max Chi"}\t{maxChi}");
 
         if (_dodgeMagicChance > 0)
         {
-            list.Add(1042971, $"Dodge Magic: {_dodgeMagicChance}%");
+            list.Add(1042971, $"{"Dodge Magic"}\t{_dodgeMagicChance}%");
         }
     }
 }

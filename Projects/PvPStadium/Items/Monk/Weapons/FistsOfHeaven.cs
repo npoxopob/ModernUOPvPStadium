@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Monk.Weapons;
 /// Level 4 monk fists. 33% Rapid Flurry (4 hits), ultra-fast 1.75s.
 /// Shatters Human shield ReflectPhysical on Flurry.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class FistsOfHeaven : BaseMonkFists
 {
     public override int RequiredMonkLevel => 4;
@@ -30,11 +30,10 @@ public partial class FistsOfHeaven : BaseMonkFists
     public override int InitMaxHits => 255;
 
     [Constructible]
-    public FistsOfHeaven() : base(0x13C6)
+    public FistsOfHeaven() : base(0x13B9)
     {
         Name = "Fists of Heaven";
         Hue = 0x0A09;
         Weight = 1.0;
-        Layer = Layer.OneHanded;
     }
 }

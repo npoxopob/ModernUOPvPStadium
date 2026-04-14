@@ -4,7 +4,7 @@ using Server;
 namespace PvPStadium.Items.Monk.Clothing;
 
 /// <summary>Level 2 monk gi. +8 DEX, +10% Evasion.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class AcolyteGi : BaseMonkGi
 {
     public override int RequiredMonkLevel => 2;

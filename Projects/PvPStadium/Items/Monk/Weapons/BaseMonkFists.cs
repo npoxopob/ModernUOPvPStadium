@@ -11,7 +11,7 @@ namespace PvPStadium.Items.Monk.Weapons;
 /// Features: Rapid Flurry — series of quick hits (3-4 x 40% damage).
 /// Each hit can trigger on-hit effects. Lv4: destroys Human shield ReflectPhysical.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseMonkFists : BaseBashing
 {
     public virtual int RequiredMonkLevel => 1;
@@ -49,7 +49,9 @@ public abstract partial class BaseMonkFists : BaseBashing
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         // Rapid Flurry proc
         if (FlurryChance > 0.0 && Utility.RandomDouble() < FlurryChance)
@@ -75,7 +77,9 @@ public abstract partial class BaseMonkFists : BaseBashing
         for (var i = 0; i < FlurryHits; i++)
         {
             if (!defender.Alive || !attacker.Alive)
+            {
                 break;
+            }
 
             var hitDamage = Math.Max(1, (int)(baseDamage * FlurryDamageMod));
             defender.Damage(hitDamage, attacker);
@@ -86,31 +90,28 @@ public abstract partial class BaseMonkFists : BaseBashing
     private static void TryDestroyShieldReflect(Mobile defender)
     {
         var shield = defender.FindItemOnLayer(Layer.TwoHanded);
-        if (shield is BaseShield baseShield)
+        if (shield is BaseShield baseShield && baseShield.Attributes.ReflectPhysical > 0)
         {
-            if (baseShield.Attributes.ReflectPhysical > 0)
-            {
-                baseShield.Attributes.ReflectPhysical = 0;
-                baseShield.InvalidateProperties();
-                defender.SendMessage(0x22, "Your shield's reflection is shattered!");
-                defender.PlaySound(0x1F8);
-                defender.FixedParticles(0x36BD, 20, 10, 5044, EffectLayer.Waist);
-            }
+            baseShield.Attributes.ReflectPhysical = 0;
+            baseShield.InvalidateProperties();
+            defender.SendMessage(0x22, "Your shield's reflection is shattered!");
+            defender.PlaySound(0x1F8);
+            defender.FixedParticles(0x36BD, 20, 10, 5044, EffectLayer.Waist);
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (FlurryChance > 0.0)
         {
-            list.Add(1042971, $"Rapid Flurry: {(int)(FlurryChance * 100)}% ({FlurryHits} hits x {(int)(FlurryDamageMod * 100)}%)");
+            list.Add(1042971, $"{"Rapid Flurry"}\t{(int)(FlurryChance * 100)}% ({FlurryHits} hits x {(int)(FlurryDamageMod * 100)}%)");
         }
 
         if (DestroysShields)
         {
-            list.Add(1042971, "Shatters shield reflection");
+            list.Add(1042971, $"{"Shatters shield reflection"}");
         }
     }
 }

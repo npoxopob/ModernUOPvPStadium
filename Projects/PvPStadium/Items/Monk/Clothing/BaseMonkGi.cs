@@ -11,7 +11,7 @@ namespace PvPStadium.Items.Monk.Clothing;
 /// Physical resist bonus, and Paralyze immunity at Lv4.
 /// On dodge (attacker misses), grants Chi charge via ChiSystem.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseMonkGi : BaseOuterTorso
 {
     public virtual int RequiredMonkLevel => 1;
@@ -26,7 +26,7 @@ public abstract partial class BaseMonkGi : BaseOuterTorso
     /// <summary>If true, wearer is immune to paralyze.</summary>
     public virtual bool ParalyzeImmunity => false;
 
-    protected BaseMonkGi(int hue) : base(0x1F03, hue) // plain dress / tunic graphic
+    protected BaseMonkGi(int hue) : base(0x1F03, hue)
     {
         LootType = LootType.Blessed;
         Weight = 2.0;
@@ -68,7 +68,9 @@ public abstract partial class BaseMonkGi : BaseOuterTorso
     {
         var level = MonkItemHelper.GetMonkLevel(monk);
         if (level < 1)
+        {
             return;
+        }
 
         var maxChi = MonkItemHelper.MaxChi(level);
         var charges = ChiSystem.AddCharge(monk, maxChi);
@@ -77,23 +79,23 @@ public abstract partial class BaseMonkGi : BaseOuterTorso
         monk.SendMessage(0x480, $"Chi: {charges}/{maxChi}");
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (EvasionBonus > 0)
         {
-            list.Add(1042971, $"Evasion: +{EvasionBonus}%");
+            list.Add(1042971, $"{"Evasion"}\t+{EvasionBonus}%");
         }
 
         if (PhysicalResistBonus > 0)
         {
-            list.Add(1042971, $"Physical Resist: +{PhysicalResistBonus}%");
+            list.Add(1042971, $"{"Physical Resist"}\t+{PhysicalResistBonus}%");
         }
 
         if (ParalyzeImmunity)
         {
-            list.Add(1042971, "Paralyze Immunity");
+            list.Add(1042971, $"{"Paralyze Immunity"}");
         }
     }
 }

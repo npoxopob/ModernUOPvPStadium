@@ -11,19 +11,20 @@ namespace PvPStadium.Items.Monk;
 /// Instantly grants 3 Chi charges. 30 second cooldown.
 /// 50 charges total.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class Incense : Item
 {
-    public static int MaxCharges => 50;
-    public static int ChiGrant => 3;
-    public static double CooldownSeconds => 30.0;
+    public const int MaxCharges = 50;
+    public const int ChiGrant = 3;
+    public static readonly TimeSpan CooldownDelay = TimeSpan.FromSeconds(30.0);
 
     [SerializableField(0)]
+    [InvalidateProperties]
     [SerializedCommandProperty(AccessLevel.GameMaster)]
     private int _charges;
 
     [Constructible]
-    public Incense() : base(0x1BD1) // candle/incense graphic
+    public Incense() : base(0x1BD1)
     {
         Name = "Monk Incense";
         Hue = 0x0835;
@@ -61,7 +62,6 @@ public partial class Incense : Item
         var level = MonkItemHelper.GetMonkLevel(from);
         var maxChi = MonkItemHelper.MaxChi(level);
 
-        // Grant Chi charges
         for (var i = 0; i < ChiGrant; i++)
         {
             ChiSystem.AddCharge(from, maxChi);
@@ -69,11 +69,10 @@ public partial class Incense : Item
 
         var currentChi = ChiSystem.GetCharges(from);
 
-        _charges--;
-        InvalidateProperties();
+        Charges--;
 
         from.BeginAction<Incense>();
-        Timer.StartTimer(TimeSpan.FromSeconds(CooldownSeconds), () => from.EndAction<Incense>());
+        Timer.DelayCall(CooldownDelay, EndCooldown, from);
 
         from.FixedParticles(0x376A, 9, 32, 5007, 0x480, 0, EffectLayer.Waist);
         from.PlaySound(0x1E3);
@@ -85,10 +84,15 @@ public partial class Incense : Item
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    private static void EndCooldown(Mobile m)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, $"Charges: {_charges}/{MaxCharges}");
-        list.Add(1042971, $"Grants +{ChiGrant} Chi instantly ({CooldownSeconds}s cooldown)");
+        m?.EndAction<Incense>();
+    }
+
+    public override void GetProperties(IPropertyList list)
+    {
+        base.GetProperties(list);
+        list.Add(1042971, $"{"Charges"}\t{_charges}/{MaxCharges}");
+        list.Add(1042971, $"{"Use"}\tGrants +{ChiGrant} Chi (30s cooldown)");
     }
 }

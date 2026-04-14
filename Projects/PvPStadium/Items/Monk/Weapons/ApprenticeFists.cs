@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Monk.Weapons;
 
 /// <summary>Level 1 monk fists. Fast, no Flurry proc.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class ApprenticeFists : BaseMonkFists
 {
     public override int RequiredMonkLevel => 1;
@@ -22,11 +22,10 @@ public partial class ApprenticeFists : BaseMonkFists
     public override int InitMaxHits => 255;
 
     [Constructible]
-    public ApprenticeFists() : base(0x13C6) // leather gloves
+    public ApprenticeFists() : base(0x13B9) // mace graphic (compact fist weapon)
     {
         Name = "Apprentice Fists";
         Hue = 0x0835;
         Weight = 1.0;
-        Layer = Layer.OneHanded;
     }
 }

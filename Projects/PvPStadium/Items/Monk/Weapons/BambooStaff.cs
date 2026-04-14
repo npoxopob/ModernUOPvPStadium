@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Monk.Weapons;
 
 /// <summary>Level 1 monk staff. No Counter Strike procs.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BambooStaff : BaseMonkStaff
 {
     public override int RequiredMonkLevel => 1;

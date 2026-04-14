@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Monk.Weapons;
 /// Level 4 monk staff. 40% Counter Strike (x5 Chi damage), +12 vs Berserker.
 /// Counter Strike always stuns regardless of Chi count.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class CelestialStaff : BaseMonkStaff
 {
     public override int RequiredMonkLevel => 4;

@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Monk.Weapons;
 
 /// <summary>Level 3 monk staff. 33% Counter Strike (x4 Chi damage), +8 vs Berserker.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class DragonStaff : BaseMonkStaff
 {
     public override int RequiredMonkLevel => 3;

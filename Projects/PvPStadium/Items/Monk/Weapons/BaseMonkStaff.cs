@@ -13,7 +13,7 @@ namespace PvPStadium.Items.Monk.Weapons;
 /// High Chi counts add Stun and Knockback.
 /// Bonus flat damage vs Berserker.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseMonkStaff : BaseStaff
 {
     public virtual int RequiredMonkLevel => 1;
@@ -51,7 +51,9 @@ public abstract partial class BaseMonkStaff : BaseStaff
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         // Bonus damage vs Berserker
         if (BerserkerBonusDamage > 0 && IsBerserker(defender))
@@ -72,7 +74,9 @@ public abstract partial class BaseMonkStaff : BaseStaff
     {
         var (bonusDamage, stun, knockback) = ChiSystem.ConsumeCharges(attacker);
         if (bonusDamage <= 0)
+        {
             return;
+        }
 
         // Apply multiplier (design: x3 Lv2, x4 Lv3, x5 Lv4)
         var scaledDamage = bonusDamage / ChiSystem.DamagePerCharge * ChiDamageMultiplier;
@@ -102,17 +106,29 @@ public abstract partial class BaseMonkStaff : BaseStaff
     private static void ApplyKnockback(Mobile attacker, Mobile defender, int tiles)
     {
         if (defender.Map == null || defender.Map == Map.Internal)
+        {
             return;
+        }
 
         var dx = defender.X - attacker.X;
         var dy = defender.Y - attacker.Y;
 
         // Normalize direction
-        if (dx != 0) dx = dx > 0 ? 1 : -1;
-        if (dy != 0) dy = dy > 0 ? 1 : -1;
+        if (dx != 0)
+        {
+            dx = dx > 0 ? 1 : -1;
+        }
+
+        if (dy != 0)
+        {
+            dy = dy > 0 ? 1 : -1;
+        }
 
         // If same tile, push north
-        if (dx == 0 && dy == 0) dy = -1;
+        if (dx == 0 && dy == 0)
+        {
+            dy = -1;
+        }
 
         var newX = defender.X + dx * tiles;
         var newY = defender.Y + dy * tiles;
@@ -128,32 +144,36 @@ public abstract partial class BaseMonkStaff : BaseStaff
     private static bool IsBerserker(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return false;
+        }
 
         if (!Races.RaceStateStore.TryGet(m.Serial, out var st) || st == null)
+        {
             return false;
+        }
 
         return st.RaceKey == "berserker";
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         var chi = ChiSystem.GetCharges(RootParent as Mobile ?? Parent as Mobile);
         if (chi > 0)
         {
-            list.Add(1042971, $"Chi: {chi}");
+            list.Add(1042971, $"{"Chi"}\t{chi}");
         }
 
         if (CounterStrikeChance > 0.0)
         {
-            list.Add(1042971, $"Counter Strike: {(int)(CounterStrikeChance * 100)}% (x{ChiDamageMultiplier} Chi dmg)");
+            list.Add(1042971, $"{"Counter Strike"}\t{(int)(CounterStrikeChance * 100)}% (x{ChiDamageMultiplier})");
         }
 
         if (BerserkerBonusDamage > 0)
         {
-            list.Add(1042971, $"vs Berserker: +{BerserkerBonusDamage} damage");
+            list.Add(1042971, $"{"vs Berserker"}\t+{BerserkerBonusDamage} damage");
         }
     }
 }
