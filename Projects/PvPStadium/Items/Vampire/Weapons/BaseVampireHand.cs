@@ -10,7 +10,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Base class for vampire ranged weapons (crossbow-type "Hands").
 /// Fire visual on hit, optional ignition DoT.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseVampireHand : BaseRanged
 {
     /// <summary>Minimum vampire level required to equip.</summary>

@@ -4,7 +4,7 @@ using Server;
 namespace PvPStadium.Items.Berserker.Armor;
 
 /// <summary>Level 3 (Berserker) mask. Regen 6-12 HP every 3s.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BerserkerMask : BaseBerserkerMask
 {
     public override int RequiredBerserkerLevel => 3;

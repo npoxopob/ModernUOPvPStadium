@@ -52,7 +52,9 @@ public static class FurySystem
     {
         var level = BerserkerItemHelper.GetBerserkerLevel(target);
         if (level < 2)
+        {
             return; // Adept of Might has no fury
+        }
 
         var max = GetMaxFury(level);
         var current = GetFury(target);
@@ -72,7 +74,7 @@ public static class FurySystem
             if (target.CanBeginAction<FuryParalyzeImmunity>())
             {
                 target.BeginAction<FuryParalyzeImmunity>();
-                Timer.StartTimer(TimeSpan.FromSeconds(10.0), () => target.EndAction<FuryParalyzeImmunity>());
+                Timer.DelayCall(TimeSpan.FromSeconds(10.0), EndFuryImmunity, target);
                 target.SendMessage(0x3B2, "Your fury grants you paralyze immunity for 10 seconds!");
             }
         }
@@ -94,15 +96,21 @@ public static class FurySystem
     {
         var level = BerserkerItemHelper.GetBerserkerLevel(attacker);
         if (level < 2)
+        {
             return 0;
+        }
 
         var fury = GetFury(attacker);
         if (fury <= 0)
+        {
             return 0;
+        }
 
         var bonus = fury / 20;
         if (bonus <= 0)
+        {
             return 0;
+        }
 
         // Consume fury equal to bonus dealt
         var consumed = Math.Min(fury, bonus);
@@ -127,6 +135,11 @@ public static class FurySystem
         {
             pm.SendMessage(0x26, $"Fury: {current}/{max}");
         }
+    }
+
+    private static void EndFuryImmunity(Mobile m)
+    {
+        m?.EndAction<FuryParalyzeImmunity>();
     }
 
     // Marker type for BeginAction/EndAction paralyze immunity

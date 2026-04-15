@@ -14,17 +14,18 @@ namespace PvPStadium.Items.Necromancer;
 /// Use on a light-class player (paladin) to deal 20-25 dark damage directly.
 /// Has 50 charges total.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class DarkEssence : Item
 {
-    public static int MaxCharges => 50;
-    public static int EmpowerChargesMin => 8;
-    public static int EmpowerChargesMax => 10;
-    public static int DirectDamageMin => 20;
-    public static int DirectDamageMax => 25;
-    public static double CooldownSeconds => 2.0;
+    public const int MaxCharges = 50;
+    public const int EmpowerChargesMin = 8;
+    public const int EmpowerChargesMax = 10;
+    public const int DirectDamageMin = 20;
+    public const int DirectDamageMax = 25;
+    public const double CooldownSeconds = 2.0;
 
     [SerializableField(0)]
+    [InvalidateProperties]
     [SerializedCommandProperty(AccessLevel.GameMaster)]
     private int _charges;
 
@@ -73,11 +74,11 @@ public partial class DarkEssence : Item
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, $"Charges: {_charges}/{MaxCharges}");
-        list.Add(1042971, "Empower daggers or curse light enemies");
+        base.GetProperties(list);
+        list.Add(1042971, $"{"Charges"}\t{_charges}/{MaxCharges}");
+        list.Add(1042971, $"{"Empower daggers or curse light enemies"}");
     }
 
     private class DarkEssenceTarget : Target
@@ -92,7 +93,9 @@ public partial class DarkEssence : Item
         protected override void OnTarget(Mobile from, object targeted)
         {
             if (_essence.Deleted || !_essence.IsChildOf(from.Backpack))
+            {
                 return;
+            }
 
             if (_essence._charges <= 0)
             {
@@ -130,11 +133,13 @@ public partial class DarkEssence : Item
                 }
 
                 if (!from.CanBeHarmful(target))
+                {
                     return;
+                }
 
                 from.DoHarmful(target);
                 from.BeginAction<DarkEssence>();
-                Timer.StartTimer(TimeSpan.FromSeconds(CooldownSeconds), () => from.EndAction<DarkEssence>());
+                Timer.DelayCall(TimeSpan.FromSeconds(CooldownSeconds), EndDarkEssenceCooldown, from);
 
                 var damage = Utility.RandomMinMax(DirectDamageMin, DirectDamageMax);
                 AOS.Damage(target, from, damage, 0, 0, 100, 0, 0); // dark (cold) damage
@@ -148,6 +153,11 @@ public partial class DarkEssence : Item
             }
 
             from.SendMessage(0x22, "You can only use this on a necro dagger or a light enemy.");
+        }
+
+        private static void EndDarkEssenceCooldown(Mobile m)
+        {
+            m?.EndAction<DarkEssence>();
         }
     }
 }

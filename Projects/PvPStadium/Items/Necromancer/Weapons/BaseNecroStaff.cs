@@ -11,7 +11,7 @@ namespace PvPStadium.Items.Necromancer.Weapons;
 /// Features: Curse of Decay on hit — INT debuff + mana drain.
 /// Bonus damage vs "light" classes (paladin).
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseNecroStaff : BaseStaff
 {
     public virtual int RequiredNecromancerLevel => 1;
@@ -97,18 +97,18 @@ public abstract partial class BaseNecroStaff : BaseStaff
         attacker.PublicOverheadMessage(MessageType.Emote, 0x455, false, "*Curse of Decay!*");
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (CurseChance > 0.0)
         {
-            list.Add(1042971, $"Curse of Decay: {(int)(CurseChance * 100)}% (-{CurseIntMin}-{CurseIntMax} INT, {CurseDuration}s)");
+            list.Add(1042971, $"{"Curse of Decay"}\t{(int)(CurseChance * 100)}% (-{CurseIntMin}-{CurseIntMax} {"INT"}, {CurseDuration}{"s"}");
         }
 
         if (LightBonusDamage > 0)
         {
-            list.Add(1042971, $"vs Paladin: +{LightBonusDamage} damage");
+            list.Add(1042971, $"{"vs Paladin"}\t+{LightBonusDamage} {"damage"}");
         }
     }
 }

@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Amazon.Weapons;
 
 /// <summary>Level 4 (Elite Amazon) spear. 60% paralyze, 5s.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class EliteSpearOfParalyzeRoot : BaseAmazonSpear
 {
     public override int RequiredAmazonLevel => 4;

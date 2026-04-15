@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// pvp_alfa: DAM 82-92, range 10, color 0aee.
 /// </summary>
 [Flippable(0x13FD, 0x13FC)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class FieryHand : BaseVampireHand
 {
     [Constructible]

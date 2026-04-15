@@ -10,7 +10,7 @@ namespace PvPStadium.Items.Paladin.Jewelry;
 /// Level 3 (Paladin) ring.
 /// 33% chance to reflect paralyze spell back to caster.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class RingOfHeaven : BaseRing
 {
     [Constructible]
@@ -34,11 +34,11 @@ public partial class RingOfHeaven : BaseRing
         return base.CanEquip(from);
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, "33% Paralyze Reflection");
-        list.Add(1042971, "Paladin");
+        base.GetProperties(list);
+        list.Add(1042971, $"{"33% Paralyze Reflection"}");
+        list.Add(1042971, $"{"Paladin"}");
     }
 
     /// <summary>

@@ -7,7 +7,7 @@ namespace PvPStadium.Items.Paladin.Weapons;
 /// <summary>
 /// Level 1 (Follower of Light) paladin sword. Basic weapon, no special procs.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BladeOfLight : BasePaladinSword
 {
     public override int RequiredPaladinLevel => 1;

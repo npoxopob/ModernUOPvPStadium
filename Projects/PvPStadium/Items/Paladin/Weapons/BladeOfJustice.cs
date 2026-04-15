@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Paladin.Weapons;
 /// Level 2 (Knight of Justice) paladin sword.
 /// 50% chance holy damage 8-12, bonus vs chaos, 10% heal on non-chaos hit.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BladeOfJustice : BasePaladinSword
 {
     public override int RequiredPaladinLevel => 2;

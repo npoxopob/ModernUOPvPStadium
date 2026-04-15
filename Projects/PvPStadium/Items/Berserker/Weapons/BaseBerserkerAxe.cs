@@ -12,7 +12,7 @@ namespace PvPStadium.Items.Berserker.Weapons;
 /// Base class for berserker axes (two-handed, swordsmanship).
 /// Features: fury bonus damage on hit (consumed from FurySystem).
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseBerserkerAxe : BaseAxe
 {
     /// <summary>Minimum berserker level required to equip.</summary>
@@ -52,14 +52,14 @@ public abstract partial class BaseBerserkerAxe : BaseAxe
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, "Berserker Weapon");
+        base.GetProperties(list);
+        list.Add(1042971, $"{"Berserker Weapon"}");
 
         if (RequiredBerserkerLevel >= 2)
         {
-            list.Add(1042971, "Fury: bonus damage from accumulated rage");
+            list.Add(1042971, $"{"Fury"}\t{"bonus damage from accumulated rage"}");
         }
     }
 }

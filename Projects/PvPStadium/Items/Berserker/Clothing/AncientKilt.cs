@@ -4,7 +4,7 @@ using Server;
 namespace PvPStadium.Items.Berserker.Clothing;
 
 /// <summary>Level 3 (Berserker) kilt. +10 DEX, Weaken immunity.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class AncientKilt : BaseBerserkerKilt
 {
     public override int RequiredBerserkerLevel => 3;

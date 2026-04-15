@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Amazon.Weapons;
 
 /// <summary>Level 2 (Amazon) kryss. 50% poison + weaken 24-35 STR, 15s.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class KryssOfIllness : BaseAmazonKryss
 {
     public override int RequiredAmazonLevel => 2;

@@ -7,7 +7,7 @@ namespace PvPStadium.Items.Paladin.Weapons;
 /// <summary>
 /// Level 1 (Follower of Light) paladin mace. Basic weapon, no special procs.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BlessedMace : BasePaladinMace
 {
     public override int RequiredPaladinLevel => 1;

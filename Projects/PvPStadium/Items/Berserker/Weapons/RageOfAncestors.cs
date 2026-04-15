@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Berserker.Weapons;
 /// Level 4 (Child of Ragnar) elite berserker axe. Highest fury-enhanced damage.
 /// </summary>
 [Flippable(0x13FB, 0x13FA)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class RageOfAncestors : BaseBerserkerAxe
 {
     public override int RequiredBerserkerLevel => 4;

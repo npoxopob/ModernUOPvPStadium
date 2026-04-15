@@ -13,15 +13,16 @@ namespace PvPStadium.Items.Vampire;
 /// pvp_alfa: Bottle of Blood — Vampirism bonus: if skill > 110: +5 + (skill-1000)/20; else +(skill-1000)/10.
 /// Reduced by 30% under Holy Essence effect (not implemented yet).
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BottleOfBlood : Item
 {
-    public static int MinHeal => 26;
-    public static int MaxHeal => 38;
-    public static int MaxCharges => 100;
-    public static double CooldownSeconds => 1.0;
+    public const int MinHeal = 26;
+    public const int MaxHeal = 38;
+    public const int MaxCharges = 100;
+    public const double CooldownSeconds = 1.0;
 
     [SerializableField(0)]
+    [InvalidateProperties]
     [SerializedCommandProperty(AccessLevel.GameMaster)]
     private int _charges;
 
@@ -35,17 +36,19 @@ public partial class BottleOfBlood : Item
         _charges = MaxCharges;
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, $"Charges: {_charges}/{MaxCharges}");
-        list.Add(1042971, "Vampire Only");
+        base.GetProperties(list);
+        list.Add(1042971, $"{"Charges"}\t{_charges}/{MaxCharges}");
+        list.Add(1042971, $"{"Vampire Only"}");
     }
 
     public override void OnDoubleClick(Mobile from)
     {
         if (from is not PlayerMobile pm)
+        {
             return;
+        }
 
         if (!IsChildOf(pm.Backpack))
         {
@@ -90,16 +93,19 @@ public partial class BottleOfBlood : Item
         pm.FixedParticles(0x376A, 9, 32, 5005, EffectLayer.Waist);
 
         if (pm.Body.IsHuman && !pm.Mounted)
+        {
             pm.Animate(34, 5, 1, true, false, 0);
+        }
 
-        _charges--;
-        InvalidateProperties();
+        Charges--;
 
         if (_charges <= 0)
+        {
             pm.SendMessage(0x22, "The bottle is now empty.");
+        }
 
         // End cooldown after delay
-        Timer.StartTimer(TimeSpan.FromSeconds(CooldownSeconds), pm.EndAction<BottleOfBlood>);
+        Timer.DelayCall(TimeSpan.FromSeconds(CooldownSeconds), EndBloodCooldown, pm);
     }
 
     /// <summary>
@@ -108,6 +114,11 @@ public partial class BottleOfBlood : Item
     /// else: +(skill - 100.0) / 1
     /// Minimum bonus: 0
     /// </summary>
+    private static void EndBloodCooldown(Mobile m)
+    {
+        m?.EndAction<BottleOfBlood>();
+    }
+
     private static int GetVampirismBonus(PlayerMobile pm)
     {
         // Vampirism is a custom skill; check if it exists. If not, use Spirit Speak as proxy.
@@ -115,10 +126,14 @@ public partial class BottleOfBlood : Item
         var skill = pm.Skills[SkillName.SpiritSpeak].Value;
 
         if (skill <= 100.0)
+        {
             return 0;
+        }
 
         if (skill > 110.0)
+        {
             return 5 + (int)((skill - 100.0) / 2.0);
+        }
 
         return (int)(skill - 100.0);
     }

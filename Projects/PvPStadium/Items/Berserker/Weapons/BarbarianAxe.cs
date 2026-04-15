@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Berserker.Weapons;
 /// Level 2 (Barbarian) berserker axe. Fury-enhanced damage.
 /// </summary>
 [Flippable(0x13FB, 0x13FA)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BarbarianAxe : BaseBerserkerAxe
 {
     public override int RequiredBerserkerLevel => 2;

@@ -11,7 +11,7 @@ namespace PvPStadium.Items.Paladin.Weapons;
 /// Features: holy damage proc vs all targets, bonus damage vs chaos classes,
 /// heal on non-chaos hit, and optional blessing system via Holy Essence.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BasePaladinSword : BaseSword
 {
     // -- Config per subclass --
@@ -125,28 +125,28 @@ public abstract partial class BasePaladinSword : BaseSword
         _blessingCharges += charges;
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (HasHolyProc)
         {
-            list.Add(1042971, $"Holy Damage: {HolyMinDamage}-{HolyMaxDamage} ({(int)(HolyProcChance * 100)}% chance)");
+            list.Add(1042971, $"{"Holy Damage"}\t{HolyMinDamage}-{HolyMaxDamage} ({(int)(HolyProcChance * 100)}%)");
         }
 
         if (HasChaosBonus)
         {
-            list.Add(1042971, $"Bonus vs Chaos: +{ChaosBonusDamage}");
+            list.Add(1042971, $"{"Bonus vs Chaos"}\t+{ChaosBonusDamage}");
         }
 
         if (HealFraction > 0.0)
         {
-            list.Add(1042971, $"Heals {(int)(HealFraction * 100)}% on hit (non-chaos)");
+            list.Add(1042971, $"{"Heals"}\t{(int)(HealFraction * 100)}% {"on hit (non-chaos)"}");
         }
 
         if (_blessingCharges > 0)
         {
-            list.Add(1042971, $"Blessed: {_blessingCharges} charges");
+            list.Add(1042971, $"{"Blessed"}\t{_blessingCharges} {"charges"}");
         }
     }
 }

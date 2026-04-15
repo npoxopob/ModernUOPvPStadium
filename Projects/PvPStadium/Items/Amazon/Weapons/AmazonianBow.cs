@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Amazon.Weapons;
 
 /// <summary>Level 1 (Amazon Girl) bow. Distance critical, no procs.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class AmazonianBow : BaseAmazonBow
 {
     public override int RequiredAmazonLevel => 1;

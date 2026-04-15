@@ -7,7 +7,7 @@ namespace PvPStadium.Items.Vampire.Clothing;
 /// Level 1 vampire shroud. No stat bonuses, no poison protection. Hides helm.
 /// pvp_alfa: color 0455.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class GhoulShroud : BaseVampireShroud
 {
     [Constructible]

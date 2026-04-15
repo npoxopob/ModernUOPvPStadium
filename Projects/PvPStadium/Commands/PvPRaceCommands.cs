@@ -89,13 +89,19 @@ public static class PvPRaceCommands
         protected override void OnTarget(Mobile from, object targeted)
         {
             var pm = targeted as PlayerMobile ?? from as PlayerMobile;
-            if (pm == null) return;
+            if (pm == null)
+            {
+                return;
+            }
 
             var st = RaceStateStore.GetOrCreate(pm.Serial);
             st.HasLifeDrainAbility = true;
             RaceStateStore.Save();
             pm.SendMessage(0x35, "Вам выдана способность Life Drain.");
-            if (from != pm) from.SendMessage(0x44, $"Выдан Life Drain: {pm.Name}");
+            if (from != pm)
+            {
+                from.SendMessage(0x44, $"Выдан Life Drain: {pm.Name}");
+            }
         }
         protected override void OnTargetCancel(Mobile from, TargetCancelType cancel)
         {
@@ -109,13 +115,19 @@ public static class PvPRaceCommands
         protected override void OnTarget(Mobile from, object targeted)
         {
             var pm = targeted as PlayerMobile ?? from as PlayerMobile;
-            if (pm == null) return;
+            if (pm == null)
+            {
+                return;
+            }
 
             var st = RaceStateStore.GetOrCreate(pm.Serial);
             st.HasLifeDrainAbility = false;
             RaceStateStore.Save();
             pm.SendMessage(0x22, "Способность Life Drain отозвана.");
-            if (from != pm) from.SendMessage(0x44, $"Отозван Life Drain: {pm.Name}");
+            if (from != pm)
+            {
+                from.SendMessage(0x44, $"Отозван Life Drain: {pm.Name}");
+            }
         }
         protected override void OnTargetCancel(Mobile from, TargetCancelType cancel)
         {

@@ -7,7 +7,7 @@ namespace PvPStadium.Items.Amazon.Jewelry;
 /// <summary>
 /// Amazon earrings. +10 STR bonus via AosAttributes (handled by BaseJewel).
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class AmazonEarrings : BaseEarrings
 {
     [SerializableField(0)]

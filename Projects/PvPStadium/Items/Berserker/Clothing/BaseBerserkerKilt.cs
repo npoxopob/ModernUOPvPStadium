@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Berserker.Clothing;
 /// Base class for berserker kilts (BaseOuterLegs clothing).
 /// Features: DEX bonus, spell immunity (Weaken or Curse).
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseBerserkerKilt : BaseOuterLegs
 {
     /// <summary>Minimum berserker level required to equip.</summary>
@@ -70,18 +70,18 @@ public abstract partial class BaseBerserkerKilt : BaseOuterLegs
         return kilt != null && kilt.CurseImmunity;
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (WeakenImmunity)
         {
-            list.Add(1042971, "Immune to Weaken");
+            list.Add(1042971, $"{"Immune to Weaken"}");
         }
 
         if (CurseImmunity)
         {
-            list.Add(1042971, "Immune to Curse");
+            list.Add(1042971, $"{"Immune to Curse"}");
         }
     }
 }

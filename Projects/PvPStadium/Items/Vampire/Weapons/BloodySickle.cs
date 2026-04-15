@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Level 2 vampire fencing weapon. 25% bleed: 1-2 ticks, 13-16 dmg/tick.
 /// </summary>
 [Flippable(0x18C, 0x18D)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BloodySickle : BaseVampireSickle
 {
     [Constructible]

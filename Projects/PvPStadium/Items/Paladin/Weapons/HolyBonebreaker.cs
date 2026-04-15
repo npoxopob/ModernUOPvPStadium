@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Paladin.Weapons;
 /// Level 3 (Paladin) mace.
 /// Stamina drain 5-10, 33% bone break, bonus vs chaos, 10% heal.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class HolyBonebreaker : BasePaladinMace
 {
     public override int RequiredPaladinLevel => 3;

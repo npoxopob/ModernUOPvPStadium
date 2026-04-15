@@ -4,7 +4,7 @@ using Server;
 namespace PvPStadium.Items.Berserker.Armor;
 
 /// <summary>Level 1 (Adept of Might) mask. Regen 3-6 HP every 3s.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class AdeptMask : BaseBerserkerMask
 {
     public override int RequiredBerserkerLevel => 1;

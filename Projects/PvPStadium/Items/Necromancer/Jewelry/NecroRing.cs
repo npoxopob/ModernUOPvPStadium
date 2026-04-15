@@ -12,7 +12,7 @@ namespace PvPStadium.Items.Necromancer.Jewelry;
 /// Level 3: +1 FC, +10% Spell Damage, 33% Paralyze Resist
 /// Level 4: +2 FC, +15% Spell Damage, 33% Paralyze Reflect
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class NecroRing : BaseRing
 {
     [SerializableField(0)]
@@ -117,13 +117,13 @@ public partial class NecroRing : BaseRing
         return false;
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (_paralyzeReflect)
-            list.Add(1042971, "33% Paralyze Reflect");
+            list.Add(1042971, $"{"33% Paralyze Reflect"}");
         else if (_paralyzeResist)
-            list.Add(1042971, "33% Paralyze Resist");
+            list.Add(1042971, $"{"33% Paralyze Resist"}");
     }
 }

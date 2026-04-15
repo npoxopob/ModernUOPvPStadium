@@ -10,7 +10,7 @@ namespace PvPStadium.Items.Amazon.Weapons;
 /// Base class for amazon krysses (swordsmanship, kryss graphic).
 /// Features: chance to apply poison + STR weaken debuff on hit.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseAmazonKryss : BaseSword
 {
     public virtual int RequiredAmazonLevel => 1;
@@ -73,17 +73,17 @@ public abstract partial class BaseAmazonKryss : BaseSword
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (AppliesPoison)
         {
-            list.Add(1042971, $"Poison + Weaken: {(int)(ProcChance * 100)}% chance");
+            list.Add(1042971, $"{"Poison + Weaken"}\t{(int)(ProcChance * 100)}%");
         }
         else
         {
-            list.Add(1042971, $"Weaken: {(int)(ProcChance * 100)}% ({WeakenStrMin}-{WeakenStrMax} STR, {WeakenDuration}s)");
+            list.Add(1042971, $"{"Weaken"}\t{(int)(ProcChance * 100)}% ({WeakenStrMin}-{WeakenStrMax} {"STR"}, {WeakenDuration}{"s"}");
         }
     }
 }

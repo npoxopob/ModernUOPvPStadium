@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// pvp_alfa: DAM 105-130, range 10.
 /// </summary>
 [Flippable(0x13FD, 0x13FC)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class HandOfPain : BaseVampireHand
 {
     [Constructible]

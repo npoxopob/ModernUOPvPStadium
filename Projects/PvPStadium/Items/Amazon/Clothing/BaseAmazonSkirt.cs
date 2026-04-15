@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Amazon.Clothing;
 /// Base class for amazon skirts (BaseOuterLegs).
 /// Features: DEX bonus via AosAttributes, Clumsy resist/reflect, optional Weaken reflect.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseAmazonSkirt : BaseOuterLegs
 {
     public virtual int RequiredAmazonLevel => 1;
@@ -92,16 +92,16 @@ public abstract partial class BaseAmazonSkirt : BaseOuterLegs
         return false;
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (ClumsyReflect)
-            list.Add(1042971, "Reflects Clumsy");
+            list.Add(1042971, $"{"Reflects Clumsy"}");
         else if (ClumsyResist)
-            list.Add(1042971, "Resists Clumsy");
+            list.Add(1042971, $"{"Resists Clumsy"}");
 
         if (WeakenReflect)
-            list.Add(1042971, "Reflects Weaken");
+            list.Add(1042971, $"{"Reflects Weaken"}");
     }
 }

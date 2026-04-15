@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Level 2 vampire sword. Life steal: dmg/4. Charge → Hell Blaze (28-39 fire).
 /// </summary>
 [Flippable(0x13B6, 0x13B5)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class VampireClaw : BaseVampireClaw
 {
     [Constructible]

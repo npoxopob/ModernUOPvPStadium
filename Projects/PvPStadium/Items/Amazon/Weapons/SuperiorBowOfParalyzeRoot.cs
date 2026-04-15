@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Amazon.Weapons;
 
 /// <summary>Level 3 (Amazon Queen) bow. 50% paralyze + enhanced distance critical.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class SuperiorBowOfParalyzeRoot : BaseAmazonBow
 {
     public override int RequiredAmazonLevel => 3;

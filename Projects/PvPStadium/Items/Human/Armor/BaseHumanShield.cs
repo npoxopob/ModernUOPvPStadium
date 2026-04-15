@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Human.Armor;
 /// Base class for human shields.
 /// Features: defense bonus, physical reflect, Parry skill bonus at higher levels.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseHumanShield : BaseShield
 {
     public virtual int RequiredHumanLevel => 1;

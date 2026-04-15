@@ -11,13 +11,14 @@ namespace PvPStadium.Items.Berserker;
 /// 25 charges, 4 second cooldown.
 /// Healing amount scales with berserker level.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class Restoration : Item
 {
-    public static int MaxCharges => 25;
-    public static double CooldownSeconds => 4.0;
+    public const int MaxCharges = 25;
+    public const double CooldownSeconds = 4.0;
 
     [SerializableField(0)]
+    [InvalidateProperties]
     [SerializedCommandProperty(AccessLevel.GameMaster)]
     private int _charges;
 
@@ -85,7 +86,7 @@ public partial class Restoration : Item
         }
 
         from.BeginAction<Restoration>();
-        Timer.StartTimer(TimeSpan.FromSeconds(CooldownSeconds), () => from.EndAction<Restoration>());
+        Timer.DelayCall(TimeSpan.FromSeconds(CooldownSeconds), EndCooldown, from);
 
         var (healMin, healMax) = GetHealRange(level);
         var (stamMin, stamMax) = GetStaminaRange(level);
@@ -105,8 +106,7 @@ public partial class Restoration : Item
             from.Stam += Math.Min(stam, stamMissing);
         }
 
-        _charges--;
-        InvalidateProperties();
+        Charges--;
 
         from.PlaySound(0x31);
         from.FixedParticles(0x376A, 9, 32, 5005, 0x26, 0, EffectLayer.Waist);
@@ -118,10 +118,15 @@ public partial class Restoration : Item
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    private static void EndCooldown(Mobile m)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, $"Charges: {_charges}/{MaxCharges}");
-        list.Add(1042971, "Restores HP and Stamina");
+        m?.EndAction<Restoration>();
+    }
+
+    public override void GetProperties(IPropertyList list)
+    {
+        base.GetProperties(list);
+        list.Add(1042971, $"{"Charges"}\t{_charges}/{MaxCharges}");
+        list.Add(1042971, $"{"Restores HP and Stamina"}");
     }
 }

@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Paladin.Jewelry;
 /// Level 2 (Knight of Justice) paladin ring.
 /// 33% chance to resist paralyze spell.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class HolyRing : BaseRing
 {
     [Constructible]
@@ -33,11 +33,11 @@ public partial class HolyRing : BaseRing
         return base.CanEquip(from);
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, "33% Paralyze Resistance");
-        list.Add(1042971, "Knight of Justice");
+        base.GetProperties(list);
+        list.Add(1042971, $"{"33% Paralyze Resistance"}");
+        list.Add(1042971, $"{"Knight of Justice"}");
     }
 
     /// <summary>

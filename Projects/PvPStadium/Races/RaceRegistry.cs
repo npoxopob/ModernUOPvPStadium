@@ -46,7 +46,10 @@ internal static class RaceRegistry
         var enabled = list.Where(s => s.Enabled).ToArray();
         Specs = enabled;
         _byKey.Clear();
-        foreach (var s in list) _byKey[s.Key] = s; // keep all for lookup by key
+        foreach (var s in list)
+        {
+            _byKey[s.Key] = s; // keep all for lookup by key
+        }
     }
 
     public static RaceSpec? GetSpec(string key)
@@ -55,7 +58,10 @@ internal static class RaceRegistry
     public static string GetLevelName(string key, int level)
     {
         var spec = GetSpec(key);
-        if (spec == null) return key;
+        if (spec == null)
+        {
+            return key;
+        }
         var lv = spec.Levels?.FirstOrDefault(l => l.Level == level);
         return lv?.Name ?? spec.Display;
     }

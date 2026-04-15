@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Level 1 vampire fencing weapon. No special effect.
 /// </summary>
 [Flippable(0x18C, 0x18D)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class SickleOfNewborn : BaseVampireSickle
 {
     [Constructible]

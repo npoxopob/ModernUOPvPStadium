@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Amazon.Weapons;
 
 /// <summary>Level 1 (Amazon Girl) kryss. 50% weaken 18-25 STR, 10s.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class AmazonianKryss : BaseAmazonKryss
 {
     public override int RequiredAmazonLevel => 1;

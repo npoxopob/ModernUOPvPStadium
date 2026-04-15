@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Human.Armor;
 
 /// <summary>Level 3 human shield. +10% reflect physical.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class CaptainShield : BaseHumanShield
 {
     public override int RequiredHumanLevel => 3;

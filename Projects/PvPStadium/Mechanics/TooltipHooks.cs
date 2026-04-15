@@ -24,6 +24,6 @@ public static class TooltipHooks
             return;
 
         var levelName = RaceRegistry.GetLevelName(key, level);
-        list.Add(1042971, levelName);
+        list.Add(1042971, $"{levelName}");
     }
 }

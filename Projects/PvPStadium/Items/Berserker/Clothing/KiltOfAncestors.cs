@@ -4,7 +4,7 @@ using Server;
 namespace PvPStadium.Items.Berserker.Clothing;
 
 /// <summary>Level 4 (Child of Ragnar) kilt. +10 DEX, Curse immunity.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class KiltOfAncestors : BaseBerserkerKilt
 {
     public override int RequiredBerserkerLevel => 4;

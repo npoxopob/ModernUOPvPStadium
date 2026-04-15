@@ -4,7 +4,7 @@ using Server;
 namespace PvPStadium.Items.Human.Clothing;
 
 /// <summary>Level 3 human cloak. +10 DEX, +3 HP regen.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class CaptainCloak : BaseHumanCloak
 {
     public override int RequiredHumanLevel => 3;

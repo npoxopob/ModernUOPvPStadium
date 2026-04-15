@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Level 3 vampire fencing weapon. 25% bleed: 1-3 ticks, 15-18 dmg/tick.
 /// </summary>
 [Flippable(0x18C, 0x18D)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class StingOfPain : BaseVampireSickle
 {
     [Constructible]

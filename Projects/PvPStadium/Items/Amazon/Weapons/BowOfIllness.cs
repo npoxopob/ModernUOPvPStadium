@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Amazon.Weapons;
 
 /// <summary>Level 2 (Amazon) bow. 50% poison + distance critical.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BowOfIllness : BaseAmazonBow
 {
     public override int RequiredAmazonLevel => 2;

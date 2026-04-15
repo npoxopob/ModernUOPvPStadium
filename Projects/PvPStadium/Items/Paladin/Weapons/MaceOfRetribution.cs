@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Paladin.Weapons;
 /// Level 4 (Guardian of Heaven) paladin mace.
 /// Stamina drain 8-11, 40% bone break, bonus vs chaos, 10% heal.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class MaceOfRetribution : BasePaladinMace
 {
     public override int RequiredPaladinLevel => 4;

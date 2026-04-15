@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Paladin.Weapons;
 /// Level 2 (Knight of Justice) paladin mace.
 /// Stamina drain 3-8, 25% bone break, bonus vs chaos, 10% heal.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class MaceOfDisruption : BasePaladinMace
 {
     public override int RequiredPaladinLevel => 2;

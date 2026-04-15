@@ -4,7 +4,7 @@ using Server;
 namespace PvPStadium.Items.Necromancer.Clothing;
 
 /// <summary>Level 3 necromancer robe. +15 INT, 40% Holy reduction.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class RobeOfShadows : BaseNecroRobe
 {
     public override int RequiredNecromancerLevel => 3;

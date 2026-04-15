@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Human.Clothing;
 /// Base class for human cloaks.
 /// Features: DEX bonus + HP Regeneration via AosAttributes.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseHumanCloak : BaseCloak
 {
     public virtual int RequiredHumanLevel => 1;

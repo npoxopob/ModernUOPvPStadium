@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Human.Weapons;
 
 /// <summary>Level 2 human sword. 2 sockets.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class VeteranSword : BaseHumanSword
 {
     public override int RequiredHumanLevel => 2;

@@ -11,7 +11,7 @@ namespace PvPStadium.Items.Necromancer.Weapons;
 /// Features: Soul Drain on hit — steals HP from target and heals attacker.
 /// Optional poison proc at higher levels.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseNecroDagger : BaseSword
 {
     public virtual int RequiredNecromancerLevel => 1;
@@ -109,23 +109,23 @@ public abstract partial class BaseNecroDagger : BaseSword
         _empowerCharges += charges;
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (SoulDrainChance > 0.0)
         {
-            list.Add(1042971, $"Soul Drain: {(int)(SoulDrainChance * 100)}% ({SoulDrainMin}-{SoulDrainMax} HP)");
+            list.Add(1042971, $"{"Soul Drain"}\t{(int)(SoulDrainChance * 100)}% ({SoulDrainMin}-{SoulDrainMax} {"HP"}");
         }
 
         if (AppliesPoison)
         {
-            list.Add(1042971, $"Poison: {(int)(PoisonChance * 100)}% chance");
+            list.Add(1042971, $"{"Poison"}\t{(int)(PoisonChance * 100)}%");
         }
 
         if (_empowerCharges > 0)
         {
-            list.Add(1042971, $"Empowered: {_empowerCharges} charges");
+            list.Add(1042971, $"{"Empowered"}\t{_empowerCharges} {"charges"}");
         }
     }
 }

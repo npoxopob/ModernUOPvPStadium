@@ -10,7 +10,7 @@ namespace PvPStadium.Items.Amazon.Weapons;
 /// Base class for amazon spears (fencing).
 /// Features: chance to paralyze on hit.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseAmazonSpear : BaseSpear
 {
     public virtual int RequiredAmazonLevel => 1;
@@ -49,9 +49,9 @@ public abstract partial class BaseAmazonSpear : BaseSpear
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, $"Paralyze: {(int)(ParalyzeChance * 100)}% chance ({ParalyzeDuration}s)");
+        base.GetProperties(list);
+        list.Add(1042971, $"{"Paralyze"}\t{(int)(ParalyzeChance * 100)}% ({ParalyzeDuration}{"s"}");
     }
 }

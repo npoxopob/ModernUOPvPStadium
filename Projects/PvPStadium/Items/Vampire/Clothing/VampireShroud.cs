@@ -7,7 +7,7 @@ namespace PvPStadium.Items.Vampire.Clothing;
 /// Level 2 vampire shroud. +5 STR, poison resistance. Hides helm.
 /// pvp_alfa: color 0a11.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class VampireShroud : BaseVampireShroud
 {
     [Constructible]

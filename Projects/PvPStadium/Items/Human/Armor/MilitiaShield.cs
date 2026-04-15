@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Human.Armor;
 
 /// <summary>Level 1 human shield. Basic defense.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class MilitiaShield : BaseHumanShield
 {
     public override int RequiredHumanLevel => 1;

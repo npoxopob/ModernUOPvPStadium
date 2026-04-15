@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Necromancer.Weapons;
 
 /// <summary>Level 3 necromancer staff. 33% Curse of Decay, +8 vs paladin.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class StaffOfDamnation : BaseNecroStaff
 {
     public override int RequiredNecromancerLevel => 3;

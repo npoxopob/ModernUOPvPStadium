@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Amazon.Weapons;
 
 /// <summary>Level 4 (Elite Amazon) kryss. 60% lethal poison + weaken 35-50 STR, 18s.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class EliteKryssOfIllness : BaseAmazonKryss
 {
     public override int RequiredAmazonLevel => 4;

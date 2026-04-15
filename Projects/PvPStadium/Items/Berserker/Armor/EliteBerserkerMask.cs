@@ -4,7 +4,7 @@ using Server;
 namespace PvPStadium.Items.Berserker.Armor;
 
 /// <summary>Level 4 (Child of Ragnar) mask. Regen 6-14 HP every 3s.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class EliteBerserkerMask : BaseBerserkerMask
 {
     public override int RequiredBerserkerLevel => 4;

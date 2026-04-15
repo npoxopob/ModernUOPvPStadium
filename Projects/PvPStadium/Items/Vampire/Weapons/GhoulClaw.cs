@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Level 1 vampire sword. Life steal: dmg/4. No charge mechanic.
 /// </summary>
 [Flippable(0x13B6, 0x13B5)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class GhoulClaw : BaseVampireClaw
 {
     [Constructible]

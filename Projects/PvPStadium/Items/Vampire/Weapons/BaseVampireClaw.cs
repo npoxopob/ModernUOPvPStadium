@@ -10,7 +10,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Base class for vampire claw weapons (swords).
 /// Provides life steal on hit and optional charge → Hell Blaze mechanic.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseVampireClaw : BaseSword
 {
     // -- Config per subclass --

@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Higher base damage than lower tiers.
 /// </summary>
 [Flippable(0x18C, 0x18D)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class StingOfRevenge : BaseVampireSickle
 {
     [Constructible]

@@ -10,7 +10,7 @@ namespace PvPStadium.Items.Berserker.Armor;
 /// Base class for berserker masks (bear mask headgear).
 /// Features: periodic HP regeneration every 3 seconds (if INT >= 70).
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseBerserkerMask : BaseHat
 {
     /// <summary>Minimum berserker level required to equip.</summary>
@@ -29,6 +29,7 @@ public abstract partial class BaseBerserkerMask : BaseHat
     public virtual int MinInt => 70;
 
     private TimerExecutionToken _regenTimerToken;
+    private Mobile? _regenTarget;
 
     protected BaseBerserkerMask(int itemID, int hue) : base(itemID, hue)
     {
@@ -71,13 +72,23 @@ public abstract partial class BaseBerserkerMask : BaseHat
     private void StartRegenTimer(Mobile wearer)
     {
         StopRegenTimer();
+        _regenTarget = wearer;
         Timer.StartTimer(TimeSpan.FromSeconds(RegenInterval), TimeSpan.FromSeconds(RegenInterval),
-            () => OnRegenTick(wearer), out _regenTimerToken);
+            RegenTickCallback, out _regenTimerToken);
     }
 
     private void StopRegenTimer()
     {
         _regenTimerToken.Cancel();
+        _regenTarget = null;
+    }
+
+    private void RegenTickCallback()
+    {
+        if (_regenTarget != null)
+        {
+            OnRegenTick(_regenTarget);
+        }
     }
 
     private void OnRegenTick(Mobile wearer)
@@ -97,11 +108,15 @@ public abstract partial class BaseBerserkerMask : BaseHat
 
         // Require minimum INT
         if (wearer.Int < MinInt)
+        {
             return;
+        }
 
         var missing = wearer.HitsMax - wearer.Hits;
         if (missing <= 0)
+        {
             return;
+        }
 
         var heal = Utility.RandomMinMax(RegenMin, RegenMax);
         heal = Math.Min(heal, missing);
@@ -109,10 +124,10 @@ public abstract partial class BaseBerserkerMask : BaseHat
         wearer.FixedParticles(0x376A, 9, 32, 5005, 0x26, 0, EffectLayer.Waist);
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, $"HP Regen: {RegenMin}-{RegenMax} every {RegenInterval}s");
-        list.Add(1042971, $"Requires {MinInt} INT");
+        base.GetProperties(list);
+        list.Add(1042971, $"{"HP Regen"}\t{RegenMin}-{RegenMax} {"every"} {RegenInterval}{"s"}");
+        list.Add(1042971, $"{"Requires"}\t{MinInt} {"INT"}");
     }
 }

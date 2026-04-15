@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Necromancer.Weapons;
 
 /// <summary>Level 1 necromancer dagger. No procs.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class ApprenticeDagger : BaseNecroDagger
 {
     public override int RequiredNecromancerLevel => 1;

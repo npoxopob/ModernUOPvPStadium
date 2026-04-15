@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Higher base damage than lower levels.
 /// </summary>
 [Flippable(0x13B6, 0x13B5)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class NosferatuClaw : BaseVampireClaw
 {
     [Constructible]

@@ -9,7 +9,7 @@ namespace PvPStadium.Items.Necromancer.Clothing;
 /// Base class for necromancer robes (BaseOuterTorso).
 /// Features: INT bonus via AosAttributes, Holy damage reduction.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseNecroRobe : BaseOuterTorso
 {
     public virtual int RequiredNecromancerLevel => 1;
@@ -44,13 +44,13 @@ public abstract partial class BaseNecroRobe : BaseOuterTorso
         return robe?.HolyDamageReduction ?? 0;
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (HolyDamageReduction > 0)
         {
-            list.Add(1042971, $"Holy Damage Reduction: {HolyDamageReduction}%");
+            list.Add(1042971, $"{"Holy Damage Reduction"}\t{HolyDamageReduction}%");
         }
     }
 }

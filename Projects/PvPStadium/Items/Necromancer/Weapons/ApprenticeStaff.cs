@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Necromancer.Weapons;
 
 /// <summary>Level 1 necromancer staff. No procs.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class ApprenticeStaff : BaseNecroStaff
 {
     public override int RequiredNecromancerLevel => 1;

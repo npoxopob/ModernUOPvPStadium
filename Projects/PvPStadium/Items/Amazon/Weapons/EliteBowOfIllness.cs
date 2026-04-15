@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Amazon.Weapons;
 
 /// <summary>Level 4 (Elite Amazon) bow. 60% lethal poison + 25% distance critical.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class EliteBowOfIllness : BaseAmazonBow
 {
     public override int RequiredAmazonLevel => 4;

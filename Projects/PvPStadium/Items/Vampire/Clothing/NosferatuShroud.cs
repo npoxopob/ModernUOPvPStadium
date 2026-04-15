@@ -7,7 +7,7 @@ namespace PvPStadium.Items.Vampire.Clothing;
 /// Level 4 vampire shroud. +10 STR, +10 Parrying, poison REFLECT. Hides helm.
 /// pvp_alfa: color 0a28.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class NosferatuShroud : BaseVampireShroud
 {
     [Constructible]

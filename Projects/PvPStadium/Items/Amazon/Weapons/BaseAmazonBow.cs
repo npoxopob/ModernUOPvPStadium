@@ -11,7 +11,7 @@ namespace PvPStadium.Items.Amazon.Weapons;
 /// Features: distance-based critical damage at optimal range (6 tiles = +15%).
 /// Optional on-hit paralyze or poison+weaken procs.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseAmazonBow : BaseRanged
 {
     public virtual int RequiredAmazonLevel => 1;
@@ -82,19 +82,19 @@ public abstract partial class BaseAmazonBow : BaseRanged
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, $"Critical at {OptimalRange} tiles: +{(int)(CritBonus * 100)}% damage");
+        base.GetProperties(list);
+        list.Add(1042971, $"{"Critical"}\t{OptimalRange} {"tiles"}\t+{(int)(CritBonus * 100)}%");
 
         if (HasParalyzeProc)
         {
-            list.Add(1042971, $"Paralyze: {(int)(ParalyzeChance * 100)}% chance");
+            list.Add(1042971, $"{"Paralyze"}\t{(int)(ParalyzeChance * 100)}%");
         }
 
         if (HasPoisonProc)
         {
-            list.Add(1042971, $"Poison: {(int)(PoisonChance * 100)}% chance");
+            list.Add(1042971, $"{"Poison"}\t{(int)(PoisonChance * 100)}%");
         }
     }
 }

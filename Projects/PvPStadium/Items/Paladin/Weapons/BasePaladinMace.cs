@@ -10,7 +10,7 @@ namespace PvPStadium.Items.Paladin.Weapons;
 /// Base class for paladin mace weapons (mace fighting).
 /// Features: stamina drain, bone break debuff, bonus vs chaos, heal on non-chaos.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BasePaladinMace : BaseBashing
 {
     // -- Config per subclass --
@@ -66,7 +66,9 @@ public abstract partial class BasePaladinMace : BaseBashing
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         var isChaos = PaladinItemHelper.IsChaosClass(defender);
 
@@ -126,43 +128,48 @@ public abstract partial class BasePaladinMace : BaseBashing
 
         attacker.PublicOverheadMessage(MessageType.Emote, 0x480, false, "*Bone Break!*");
 
-        Timer.StartTimer(TimeSpan.FromSeconds(BoneBreakDuration), () =>
-        {
-            defender.RemoveSkillMod(mod);
-            defender.RemoveStatMod($"{Serial}BoneBreakDex");
-            defender.EndAction<BoneBreakTimer>();
-            if (defender.Alive)
-            {
-                defender.SendMessage(0x3B2, "Your bones mend and the pain subsides.");
-            }
-        });
+        var state = new BoneBreakState(defender, mod, $"{Serial}BoneBreakDex");
+        Timer.DelayCall(TimeSpan.FromSeconds(BoneBreakDuration), EndBoneBreak, state);
     }
+
+    private static void EndBoneBreak(BoneBreakState state)
+    {
+        state.Defender.RemoveSkillMod(state.Mod);
+        state.Defender.RemoveStatMod(state.StatModName);
+        state.Defender.EndAction<BoneBreakTimer>();
+        if (state.Defender.Alive)
+        {
+            state.Defender.SendMessage(0x3B2, "Your bones mend and the pain subsides.");
+        }
+    }
+
+    private record struct BoneBreakState(Mobile Defender, DefaultSkillMod Mod, string StatModName);
 
     // Timer marker type for BeginAction/EndAction
     private class BoneBreakTimer;
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (StaminaDrainMax > 0)
         {
-            list.Add(1042971, $"Stamina Drain: {StaminaDrainMin}-{StaminaDrainMax}");
+            list.Add(1042971, $"{"Stamina Drain"}\t{StaminaDrainMin}-{StaminaDrainMax}");
         }
 
         if (HasBoneBreak)
         {
-            list.Add(1042971, $"Bone Break: {(int)(BoneBreakChance * 100)}% chance, {BoneBreakDuration}s");
+            list.Add(1042971, $"{"Bone Break"}\t{(int)(BoneBreakChance * 100)}%, {BoneBreakDuration}{"s"}");
         }
 
         if (HasChaosBonus)
         {
-            list.Add(1042971, $"Bonus vs Chaos: +{ChaosBonusDamage}");
+            list.Add(1042971, $"{"Bonus vs Chaos"}\t+{ChaosBonusDamage}");
         }
 
         if (HealFraction > 0.0)
         {
-            list.Add(1042971, $"Heals {(int)(HealFraction * 100)}% on hit (non-chaos)");
+            list.Add(1042971, $"{"Heals"}\t{(int)(HealFraction * 100)}% {"on hit (non-chaos)"}");
         }
     }
 }

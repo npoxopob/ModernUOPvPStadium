@@ -14,17 +14,18 @@ namespace PvPStadium.Items.Paladin;
 /// Use on a chaos-class player to deal 20-25 holy damage directly.
 /// Has 50 charges total.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class HolyEssence : Item
 {
-    public static int MaxCharges => 50;
-    public static int BlessChargesMin => 8;
-    public static int BlessChargesMax => 10;
-    public static int DirectDamageMin => 20;
-    public static int DirectDamageMax => 25;
-    public static double CooldownSeconds => 2.0;
+    public const int MaxCharges = 50;
+    public const int BlessChargesMin = 8;
+    public const int BlessChargesMax = 10;
+    public const int DirectDamageMin = 20;
+    public const int DirectDamageMax = 25;
+    public const double CooldownSeconds = 2.0;
 
     [SerializableField(0)]
+    [InvalidateProperties]
     [SerializedCommandProperty(AccessLevel.GameMaster)]
     private int _charges;
 
@@ -73,11 +74,11 @@ public partial class HolyEssence : Item
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
-        list.Add(1042971, $"Charges: {_charges}/{MaxCharges}");
-        list.Add(1042971, "Bless weapons or smite chaos enemies");
+        base.GetProperties(list);
+        list.Add(1042971, $"{"Charges"}\t{_charges}/{MaxCharges}");
+        list.Add(1042971, $"{"Bless weapons or smite chaos enemies"}");
     }
 
     private class HolyEssenceTarget : Target
@@ -92,7 +93,9 @@ public partial class HolyEssence : Item
         protected override void OnTarget(Mobile from, object targeted)
         {
             if (_essence.Deleted || !_essence.IsChildOf(from.Backpack))
+            {
                 return;
+            }
 
             if (_essence._charges <= 0)
             {
@@ -130,11 +133,13 @@ public partial class HolyEssence : Item
                 }
 
                 if (!from.CanBeHarmful(target))
+                {
                     return;
+                }
 
                 from.DoHarmful(target);
                 from.BeginAction<HolyEssence>();
-                Timer.StartTimer(TimeSpan.FromSeconds(CooldownSeconds), () => from.EndAction<HolyEssence>());
+                Timer.DelayCall(TimeSpan.FromSeconds(CooldownSeconds), EndHolyEssenceCooldown, from);
 
                 var damage = Utility.RandomMinMax(DirectDamageMin, DirectDamageMax);
                 AOS.Damage(target, from, damage, 0, 100, 0, 0, 0); // holy (fire) damage
@@ -148,6 +153,11 @@ public partial class HolyEssence : Item
             }
 
             from.SendMessage(0x22, "You can only use this on a paladin weapon or a chaos enemy.");
+        }
+
+        private static void EndHolyEssenceCooldown(Mobile m)
+        {
+            m?.EndAction<HolyEssence>();
         }
     }
 }

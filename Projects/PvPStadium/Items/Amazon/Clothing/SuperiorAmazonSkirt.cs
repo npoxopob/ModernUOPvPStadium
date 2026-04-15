@@ -4,7 +4,7 @@ using Server;
 namespace PvPStadium.Items.Amazon.Clothing;
 
 /// <summary>Level 3 (Amazon Queen) skirt. +10 DEX, reflects Clumsy + Weaken.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class SuperiorAmazonSkirt : BaseAmazonSkirt
 {
     public override int RequiredAmazonLevel => 3;

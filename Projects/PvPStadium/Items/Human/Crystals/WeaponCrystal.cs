@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Human.Crystals;
 /// A crystal that can be socketed into a Human weapon.
 /// Double-click then target a human sword to insert.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class WeaponCrystal : Item
 {
     [SerializableField(0)]
@@ -58,9 +58,9 @@ public partial class WeaponCrystal : Item
         from.Target = new CrystalSocketTarget(this);
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         var desc = _crystalType switch
         {
@@ -73,6 +73,6 @@ public partial class WeaponCrystal : Item
         };
 
         if (desc.Length > 0)
-            list.Add(1042971, desc);
+            list.Add(1042971, $"{desc}");
     }
 }

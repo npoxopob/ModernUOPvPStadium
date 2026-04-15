@@ -11,7 +11,7 @@ namespace PvPStadium.Items.Human.Jewelry;
 /// Level 3: +10 STR, +10% DCI
 /// Level 4: +10 STR, +15% DCI
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class HumanRing : BaseRing
 {
     [SerializableField(0)]

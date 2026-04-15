@@ -12,7 +12,7 @@ namespace PvPStadium.Items.Human.Weapons;
 /// Features: crystal socket system — up to MaxSockets crystals can be inserted.
 /// Each crystal fires its effect on hit.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseHumanSword : BaseSword
 {
     public virtual int RequiredHumanLevel => 1;
@@ -172,17 +172,17 @@ public abstract partial class BaseHumanSword : BaseSword
         }
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
-        list.Add(1042971, $"Sockets: {UsedSockets}/{MaxSockets}");
+        list.Add(1042971, $"{"Sockets"}\t{UsedSockets}/{MaxSockets}");
 
         if (_socket1 != CrystalType.None)
-            list.Add(1042971, $"[1] {_socket1} (power {_power1})");
+            list.Add(1042971, $"{"[1]"}\t{_socket1} ({"power"} {_power1})");
         if (_socket2 != CrystalType.None)
-            list.Add(1042971, $"[2] {_socket2} (power {_power2})");
+            list.Add(1042971, $"{"[2]"}\t{_socket2} ({"power"} {_power2})");
         if (_socket3 != CrystalType.None)
-            list.Add(1042971, $"[3] {_socket3} (power {_power3})");
+            list.Add(1042971, $"{"[3]"}\t{_socket3} ({"power"} {_power3})");
     }
 }

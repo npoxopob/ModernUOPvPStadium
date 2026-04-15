@@ -11,7 +11,7 @@ namespace PvPStadium.Items.Vampire.Weapons;
 /// Base class for vampire fencing weapons (sickles/stings).
 /// Provides optional bleed-on-hit effect.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseVampireSickle : BaseKnife
 {
     /// <summary>Chance to apply bleed (0.0 = never, 0.25 = 25%).</summary>

@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Berserker.Weapons;
 /// Level 1 (Adept of Might) berserker axe. Basic two-handed axe.
 /// </summary>
 [Flippable(0x13FB, 0x13FA)]
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class AdeptAxe : BaseBerserkerAxe
 {
     public override int RequiredBerserkerLevel => 1;

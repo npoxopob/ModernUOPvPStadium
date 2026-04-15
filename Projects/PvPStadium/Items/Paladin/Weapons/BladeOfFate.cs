@@ -8,7 +8,7 @@ namespace PvPStadium.Items.Paladin.Weapons;
 /// Level 4 (Guardian of Heaven) paladin sword.
 /// 50% chance holy damage 12-18, bonus vs chaos +11, 10% heal, lightning visual.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class BladeOfFate : BasePaladinSword
 {
     public override int RequiredPaladinLevel => 4;

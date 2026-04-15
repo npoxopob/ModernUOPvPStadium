@@ -13,7 +13,7 @@ namespace PvPStadium.Items.Vampire.Clothing;
 /// - Helm hiding visual flag
 /// All shrouds are Blessed (kept on death) and indestructible.
 /// </summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public abstract partial class BaseVampireShroud : BaseOuterTorso
 {
     /// <summary>Minimum vampire level required to equip.</summary>
@@ -93,17 +93,17 @@ public abstract partial class BaseVampireShroud : BaseOuterTorso
         base.OnRemoved(parent);
     }
 
-    public override void AddNameProperties(IPropertyList list)
+    public override void GetProperties(IPropertyList list)
     {
-        base.AddNameProperties(list);
+        base.GetProperties(list);
 
         if (StrBonus != 0)
-            list.Add(1042971, $"Strength Bonus: +{StrBonus}");
+            list.Add(1042971, $"{"Strength Bonus"}\t+{StrBonus}");
         if (ParryBonus > 0.0)
-            list.Add(1042971, $"Parrying Bonus: +{ParryBonus:F0}");
+            list.Add(1042971, $"{"Parrying Bonus"}\t+{ParryBonus:F0}");
         if (PoisonReflect)
-            list.Add(1042971, "Poison Reflect");
+            list.Add(1042971, $"{"Poison Reflect"}");
         else if (PoisonResist)
-            list.Add(1042971, "Poison Resistance");
+            list.Add(1042971, $"{"Poison Resistance"}");
     }
 }

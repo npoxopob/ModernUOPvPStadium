@@ -5,7 +5,7 @@ using Server.Items;
 namespace PvPStadium.Items.Necromancer.Weapons;
 
 /// <summary>Level 4 necromancer dagger. 40% Soul Drain 15-25 HP + 40% deadly poison.</summary>
-[SerializationGenerator(0, false)]
+[SerializationGenerator(0)]
 public partial class DaggerOfAnnihilation : BaseNecroDagger
 {
     public override int RequiredNecromancerLevel => 4;

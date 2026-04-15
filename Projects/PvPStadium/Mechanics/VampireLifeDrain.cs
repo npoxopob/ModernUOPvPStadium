@@ -121,7 +121,10 @@ public static class VampireLifeDrain
 
         protected override void OnTarget(Mobile from, object targeted)
         {
-            if (from != _pm) return;
+            if (from != _pm)
+            {
+                return;
+            }
             if (targeted is not Mobile mob)
             {
                 _pm.SendMessage(0x22, "Неверная цель.");
