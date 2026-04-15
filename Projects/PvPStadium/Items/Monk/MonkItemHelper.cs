@@ -9,10 +9,14 @@ public static class MonkItemHelper
     public static int GetMonkLevel(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return 0;
+        }
 
         if (!RaceStateStore.TryGet(m.Serial, out var st) || st == null)
+        {
             return 0;
+        }
 
         return st.RaceKey == "monk" ? st.Level : 0;
     }

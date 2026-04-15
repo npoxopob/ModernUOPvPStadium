@@ -54,18 +54,33 @@ public static class Module
                         var dict = new System.Collections.Generic.Dictionary<int,int>();
                         foreach (var prop in mapTick.EnumerateObject())
                         {
-                            if (int.TryParse(prop.Name, out var lvl) && prop.Value.TryGetInt32(out var v)) dict[lvl]=v;
+                            if (int.TryParse(prop.Name, out var lvl) && prop.Value.TryGetInt32(out var v))
+                            {
+                                dict[lvl] = v;
+                            }
                         }
-                        if (dict.Count>0) PvPStadium.Mechanics.VampireLifeDrain.Config.PerTickHPByLevel = dict;
+
+                        if (dict.Count > 0)
+                        {
+                            PvPStadium.Mechanics.VampireLifeDrain.Config.PerTickHPByLevel = dict;
+                        }
                     }
+
                     if (ald.TryGetProperty("MaxDurationSecByLevel", out var mapDur) && mapDur.ValueKind == System.Text.Json.JsonValueKind.Object)
                     {
                         var dict = new System.Collections.Generic.Dictionary<int,double>();
                         foreach (var prop in mapDur.EnumerateObject())
                         {
-                            if (int.TryParse(prop.Name, out var lvl) && prop.Value.TryGetDouble(out var v)) dict[lvl]=v;
+                            if (int.TryParse(prop.Name, out var lvl) && prop.Value.TryGetDouble(out var v))
+                            {
+                                dict[lvl] = v;
+                            }
                         }
-                        if (dict.Count>0) PvPStadium.Mechanics.VampireLifeDrain.Config.MaxDurationSecByLevel = dict;
+
+                        if (dict.Count > 0)
+                        {
+                            PvPStadium.Mechanics.VampireLifeDrain.Config.MaxDurationSecByLevel = dict;
+                        }
                     }
                     PvPStadium.Mechanics.VampireLifeDrain.Config.MaxRange = ald.TryGetProperty("MaxRange", out var mr) && mr.TryGetInt32(out var rng) ? rng : PvPStadium.Mechanics.VampireLifeDrain.Config.MaxRange;
                     if (ald.TryGetProperty("PaladinModifierEnabled", out var pme))
@@ -85,9 +100,16 @@ public static class Module
                         var dictP = new System.Collections.Generic.Dictionary<int,double>();
                         foreach (var prop in pmap.EnumerateObject())
                         {
-                            if (int.TryParse(prop.Name, out var lvl) && prop.Value.TryGetDouble(out var v)) dictP[lvl]=v;
+                            if (int.TryParse(prop.Name, out var lvl) && prop.Value.TryGetDouble(out var v))
+                            {
+                                dictP[lvl] = v;
+                            }
                         }
-                        if (dictP.Count>0) PvPStadium.Mechanics.VampireLifeDrain.Config.PaladinPerTickMultiplierByLevel = dictP;
+
+                        if (dictP.Count > 0)
+                        {
+                            PvPStadium.Mechanics.VampireLifeDrain.Config.PaladinPerTickMultiplierByLevel = dictP;
+                        }
                     }
                 }
             }
@@ -101,43 +123,85 @@ public static class Module
                 if (anonP.TryGetProperty("ActiveHolyAura", out var aha))
                 {
                     PvPStadium.Mechanics.PaladinHolyAura.Config.Enabled = aha.TryGetProperty("Enabled", out var b) && b.ValueKind == System.Text.Json.JsonValueKind.True;
-                    if (aha.TryGetProperty("BlocksLifeDrain", out var bl) && bl.ValueKind == System.Text.Json.JsonValueKind.True) PvPStadium.Mechanics.PaladinHolyAura.Config.BlocksLifeDrain = true; else PvPStadium.Mechanics.PaladinHolyAura.Config.BlocksLifeDrain = false;
-                    if (aha.TryGetProperty("Multiplier", out var mul) && mul.TryGetDouble(out var mm)) PvPStadium.Mechanics.PaladinHolyAura.Config.Multiplier = mm;
+                    if (aha.TryGetProperty("BlocksLifeDrain", out var bl) && bl.ValueKind == System.Text.Json.JsonValueKind.True)
+                    {
+                        PvPStadium.Mechanics.PaladinHolyAura.Config.BlocksLifeDrain = true;
+                    }
+                    else
+                    {
+                        PvPStadium.Mechanics.PaladinHolyAura.Config.BlocksLifeDrain = false;
+                    }
+
+                    if (aha.TryGetProperty("Multiplier", out var mul) && mul.TryGetDouble(out var mm))
+                    {
+                        PvPStadium.Mechanics.PaladinHolyAura.Config.Multiplier = mm;
+                    }
                     if (aha.TryGetProperty("DurationByLevel", out var mapDurP) && mapDurP.ValueKind == System.Text.Json.JsonValueKind.Object)
                     {
                         var dict = new System.Collections.Generic.Dictionary<int,double>();
                         foreach (var prop in mapDurP.EnumerateObject())
                         {
-                            if (int.TryParse(prop.Name, out var lvlP) && prop.Value.TryGetDouble(out var vP)) dict[lvlP]=vP;
+                            if (int.TryParse(prop.Name, out var lvlP) && prop.Value.TryGetDouble(out var vP))
+                            {
+                                dict[lvlP] = vP;
+                            }
                         }
-                        if (dict.Count>0) PvPStadium.Mechanics.PaladinHolyAura.Config.DurationByLevel = dict;
+
+                        if (dict.Count > 0)
+                        {
+                            PvPStadium.Mechanics.PaladinHolyAura.Config.DurationByLevel = dict;
+                        }
                     }
+
                     if (aha.TryGetProperty("CooldownByLevel", out var mapCdP) && mapCdP.ValueKind == System.Text.Json.JsonValueKind.Object)
                     {
                         var dictCd = new System.Collections.Generic.Dictionary<int,double>();
                         foreach (var prop in mapCdP.EnumerateObject())
                         {
-                            if (int.TryParse(prop.Name, out var lvlP) && prop.Value.TryGetDouble(out var vP)) dictCd[lvlP]=vP;
+                            if (int.TryParse(prop.Name, out var lvlP) && prop.Value.TryGetDouble(out var vP))
+                            {
+                                dictCd[lvlP] = vP;
+                            }
                         }
-                        if (dictCd.Count>0) PvPStadium.Mechanics.PaladinHolyAura.Config.CooldownByLevel = dictCd;
+
+                        if (dictCd.Count > 0)
+                        {
+                            PvPStadium.Mechanics.PaladinHolyAura.Config.CooldownByLevel = dictCd;
+                        }
                     }
+
                     if (aha.TryGetProperty("RadiusByLevel", out var mapRadP) && mapRadP.ValueKind == System.Text.Json.JsonValueKind.Object)
                     {
                         var dictRad = new System.Collections.Generic.Dictionary<int,int>();
                         foreach (var prop in mapRadP.EnumerateObject())
                         {
-                            if (int.TryParse(prop.Name, out var lvlP) && prop.Value.TryGetInt32(out var vP)) dictRad[lvlP]=vP;
+                            if (int.TryParse(prop.Name, out var lvlP) && prop.Value.TryGetInt32(out var vP))
+                            {
+                                dictRad[lvlP] = vP;
+                            }
                         }
-                        if (dictRad.Count>0) PvPStadium.Mechanics.PaladinHolyAura.Config.RadiusByLevel = dictRad;
+
+                        if (dictRad.Count > 0)
+                        {
+                            PvPStadium.Mechanics.PaladinHolyAura.Config.RadiusByLevel = dictRad;
+                        }
                     }
+
                     if (aha.TryGetProperty("DamageReductionByLevel", out var mapRed) && mapRed.ValueKind == System.Text.Json.JsonValueKind.Object)
                     {
                         var dictRed = new System.Collections.Generic.Dictionary<int,double>();
                         foreach (var prop in mapRed.EnumerateObject())
                         {
-                            if (int.TryParse(prop.Name, out var lvlP) && prop.Value.TryGetDouble(out var vP)) dictRed[lvlP]=vP;
+                            if (int.TryParse(prop.Name, out var lvlP) && prop.Value.TryGetDouble(out var vP))
+                            {
+                                dictRed[lvlP] = vP;
+                            }
                         }
-                        if (dictRed.Count>0) PvPStadium.Mechanics.PaladinHolyAura.Config.DamageReductionByLevel = dictRed;
+
+                        if (dictRed.Count > 0)
+                        {
+                            PvPStadium.Mechanics.PaladinHolyAura.Config.DamageReductionByLevel = dictRed;
+                        }
                     }
                 }
             }

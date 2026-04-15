@@ -129,7 +129,9 @@ internal static class RaceStateStore
     {
         remaining = 0;
         if (!TryGet(pm.Serial, out var c) || c == null || c.LastLifeDrainAtTicks <= 0)
+        {
             return true;
+        }
         var last = new DateTime(c.LastLifeDrainAtTicks, DateTimeKind.Utc);
         var next = last.AddSeconds(VampireLifeDrain.Config.CooldownSec);
         var now = DateTime.UtcNow;

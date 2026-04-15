@@ -64,7 +64,9 @@ public abstract partial class BaseAmazonBow : BaseRanged
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         // Paralyze proc
         if (HasParalyzeProc && Utility.RandomDouble() < ParalyzeChance && !defender.Frozen && !defender.Paralyzed)

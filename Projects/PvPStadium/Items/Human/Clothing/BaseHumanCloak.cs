@@ -22,10 +22,14 @@ public abstract partial class BaseHumanCloak : BaseCloak
         Weight = 3.0;
 
         if (DexBonus > 0)
+        {
             Attributes.BonusDex = DexBonus;
+        }
 
         if (HpRegen > 0)
+        {
             Attributes.RegenHits = HpRegen;
+        }
     }
 
     public override bool CanEquip(Mobile from)

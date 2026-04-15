@@ -65,7 +65,9 @@ public abstract partial class BaseNecroDagger : BaseSword
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         // Soul Drain proc
         if (SoulDrainChance > 0.0 && Utility.RandomDouble() < SoulDrainChance)

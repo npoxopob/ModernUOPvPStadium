@@ -28,7 +28,9 @@ internal class RaceSelectionGump : Gump
         var specs = RaceRegistry.Specs;
         _specs = new RaceSpec[specs.Count];
         for (int i = 0; i < specs.Count; i++)
+        {
             _specs[i] = specs[i];
+        }
 
         Closable = true;
         Draggable = true;
@@ -101,7 +103,10 @@ internal class RaceSelectionGump : Gump
             var levels = "";
             for (int j = 0; j < spec.Levels.Count; j++)
             {
-                if (j > 0) levels += " → ";
+                if (j > 0)
+                {
+                    levels += " → ";
+                }
                 levels += spec.Levels[j].Name;
             }
             AddLabel(95, y + 25, 992, levels);
@@ -112,7 +117,10 @@ internal class RaceSelectionGump : Gump
                 // Show first line of description
                 var firstLine = desc;
                 var nlIdx = desc.IndexOf('\n');
-                if (nlIdx > 0) firstLine = desc[..nlIdx];
+                if (nlIdx > 0)
+                {
+                    firstLine = desc[..nlIdx];
+                }
                 AddLabel(300, y + 5, 0x384, firstLine);
 
                 // Show second line
@@ -135,11 +143,15 @@ internal class RaceSelectionGump : Gump
     public override void OnResponse(NetState sender, in RelayInfo info)
     {
         if (sender?.Mobile != _pm)
+        {
             return;
+        }
 
         int bid = info.ButtonID;
         if (bid <= 0)
+        {
             return;
+        }
 
         int index = bid - 1;
         if (index >= 0 && index < _specs.Length)
@@ -242,14 +254,18 @@ internal class RaceLevelGump : Gump
             // Description
             var desc = GetLevelDesc(spec.Key, lv.Level);
             if (desc.Length > 0)
+            {
                 AddLabel(115, y + 25, 992, desc);
+            }
         }
     }
 
     public override void OnResponse(NetState sender, in RelayInfo info)
     {
         if (sender?.Mobile != _pm)
+        {
             return;
+        }
 
         int bid = info.ButtonID;
 
@@ -262,7 +278,9 @@ internal class RaceLevelGump : Gump
         }
 
         if (bid <= 0)
+        {
             return;
+        }
 
         RaceService.AssignLogical(_pm, _spec.Key, bid);
     }

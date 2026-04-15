@@ -45,7 +45,9 @@ public abstract partial class BaseAmazonKryss : BaseSword
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         if (Utility.RandomDouble() < ProcChance)
         {

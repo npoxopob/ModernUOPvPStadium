@@ -41,7 +41,9 @@ public abstract partial class BaseBerserkerAxe : BaseAxe
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         // Fury bonus damage
         var furyBonus = FurySystem.ConsumeFuryForDamage(attacker);

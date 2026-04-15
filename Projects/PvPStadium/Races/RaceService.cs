@@ -115,11 +115,15 @@ internal static class RaceService
             {
                 var it = pm.Items[i];
                 if (it == null)
+                {
                     continue;
+                }
 
                 var layer = it.Layer;
                 if (layer == Layer.Backpack || layer == Layer.Bank || layer == Layer.Mount || layer == Layer.Invalid)
+                {
                     continue;
+                }
 
                 if (layer == Layer.Hair || layer == Layer.FacialHair)
                 {

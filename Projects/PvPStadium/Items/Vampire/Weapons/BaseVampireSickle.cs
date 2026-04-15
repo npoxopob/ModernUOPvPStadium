@@ -58,7 +58,9 @@ public abstract partial class BaseVampireSickle : BaseKnife
         base.OnHit(attacker, defender, damageBonus);
 
         if (BleedChance <= 0.0 || defender == null || !defender.Alive)
+        {
             return;
+        }
 
         if (Utility.RandomDouble() < BleedChance && !VampireBleed.IsBleeding(defender))
         {
@@ -82,7 +84,9 @@ public static class VampireBleed
     public static void Begin(Mobile target, Mobile attacker, int ticks, int minDmg, int maxDmg)
     {
         if (_active.TryGetValue(target, out var existing))
+        {
             existing.Stop();
+        }
 
         var timer = new BleedTimer(target, attacker, ticks, minDmg, maxDmg);
         _active[target] = timer;
@@ -92,7 +96,9 @@ public static class VampireBleed
     public static void End(Mobile target)
     {
         if (_active.Remove(target, out var t))
+        {
             t.Stop();
+        }
     }
 
     private class BleedTimer : Timer
@@ -128,7 +134,9 @@ public static class VampireBleed
 
             _remaining--;
             if (_remaining <= 0)
+            {
                 End(_target);
+            }
         }
     }
 }

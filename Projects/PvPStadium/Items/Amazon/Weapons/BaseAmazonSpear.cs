@@ -38,7 +38,9 @@ public abstract partial class BaseAmazonSpear : BaseSpear
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         if (Utility.RandomDouble() < ParalyzeChance && !defender.Frozen && !defender.Paralyzed)
         {

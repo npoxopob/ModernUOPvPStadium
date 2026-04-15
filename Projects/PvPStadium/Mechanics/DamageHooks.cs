@@ -28,7 +28,9 @@ public static class DamageHooks
                 {
                     scalar *= mult; // multiply incoming damage by reduction multiplier
                     if (scalar < 0.0)
+                    {
                         scalar = 0.0;
+                    }
                     return true;
                 }
             }

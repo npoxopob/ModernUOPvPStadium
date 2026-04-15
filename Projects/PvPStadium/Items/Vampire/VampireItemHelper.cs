@@ -14,10 +14,14 @@ public static class VampireItemHelper
     public static int GetVampireLevel(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return 0;
+        }
 
         if (!RaceStateStore.TryGet(m.Serial, out var st) || st == null)
+        {
             return 0;
+        }
 
         return st.RaceKey == "vampire" ? st.Level : 0;
     }
@@ -33,7 +37,9 @@ public static class VampireItemHelper
     public static string? GetRaceKey(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return null;
+        }
 
         return RaceStateStore.TryGet(m.Serial, out var st) && st != null ? st.RaceKey : null;
     }

@@ -47,11 +47,15 @@ public partial class HolyRing : BaseRing
     public static bool TryResistParalyze(Mobile target)
     {
         if (target is not PlayerMobile pm)
+        {
             return false;
+        }
 
         var ring = pm.FindItemOnLayer<HolyRing>(Layer.Ring);
         if (ring == null)
+        {
             return false;
+        }
 
         // 33% chance to resist
         if (Utility.RandomDouble() < 0.33)

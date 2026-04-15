@@ -16,7 +16,9 @@ public class CrystalSocketTarget : Target
     protected override void OnTarget(Mobile from, object targeted)
     {
         if (_crystal.Deleted || !_crystal.IsChildOf(from.Backpack))
+        {
             return;
+        }
 
         if (targeted is not BaseHumanSword sword)
         {

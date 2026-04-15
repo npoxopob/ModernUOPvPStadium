@@ -9,10 +9,14 @@ public static class HumanItemHelper
     public static int GetHumanLevel(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return 0;
+        }
 
         if (!RaceStateStore.TryGet(m.Serial, out var st) || st == null)
+        {
             return 0;
+        }
 
         return st.RaceKey == "human" ? st.Level : 0;
     }

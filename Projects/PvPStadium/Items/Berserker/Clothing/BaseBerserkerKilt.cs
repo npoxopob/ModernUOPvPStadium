@@ -51,7 +51,9 @@ public abstract partial class BaseBerserkerKilt : BaseOuterLegs
     public static bool HasWeakenImmunity(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return false;
+        }
 
         var kilt = m.FindItemOnLayer<BaseBerserkerKilt>(Layer.OuterLegs);
         return kilt != null && kilt.WeakenImmunity;
@@ -64,7 +66,9 @@ public abstract partial class BaseBerserkerKilt : BaseOuterLegs
     public static bool HasCurseImmunity(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return false;
+        }
 
         var kilt = m.FindItemOnLayer<BaseBerserkerKilt>(Layer.OuterLegs);
         return kilt != null && kilt.CurseImmunity;

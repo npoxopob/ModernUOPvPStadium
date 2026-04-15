@@ -54,12 +54,16 @@ public abstract partial class BaseVampireShroud : BaseOuterTorso
         base.OnAdded(parent);
 
         if (parent is not Mobile mob)
+        {
             return;
+        }
 
         var serial = Serial;
 
         if (StrBonus != 0)
+        {
             mob.AddStatMod(new StatMod(StatType.Str, $"{serial}VStr", StrBonus, TimeSpan.Zero));
+        }
 
         if (ParryBonus > 0.0)
         {
@@ -98,12 +102,22 @@ public abstract partial class BaseVampireShroud : BaseOuterTorso
         base.GetProperties(list);
 
         if (StrBonus != 0)
+        {
             list.Add(1042971, $"{"Strength Bonus"}\t+{StrBonus}");
+        }
+
         if (ParryBonus > 0.0)
+        {
             list.Add(1042971, $"{"Parrying Bonus"}\t+{ParryBonus:F0}");
+        }
+
         if (PoisonReflect)
+        {
             list.Add(1042971, $"{"Poison Reflect"}");
+        }
         else if (PoisonResist)
+        {
             list.Add(1042971, $"{"Poison Resistance"}");
+        }
     }
 }

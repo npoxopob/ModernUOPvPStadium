@@ -48,9 +48,20 @@ public abstract partial class BaseHumanSword : BaseSword
         get
         {
             var count = 0;
-            if (_socket1 != CrystalType.None) count++;
-            if (_socket2 != CrystalType.None) count++;
-            if (_socket3 != CrystalType.None) count++;
+            if (_socket1 != CrystalType.None)
+            {
+                count++;
+            }
+
+            if (_socket2 != CrystalType.None)
+            {
+                count++;
+            }
+
+            if (_socket3 != CrystalType.None)
+            {
+                count++;
+            }
             return count;
         }
     }
@@ -59,7 +70,9 @@ public abstract partial class BaseHumanSword : BaseSword
     public bool TrySocketCrystal(CrystalType type, int power)
     {
         if (type == CrystalType.None)
+        {
             return false;
+        }
 
         if (_socket1 == CrystalType.None && MaxSockets >= 1)
         {
@@ -101,15 +114,25 @@ public abstract partial class BaseHumanSword : BaseSword
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         // Fire all socketed crystals
         if (_socket1 != CrystalType.None)
+        {
             ApplyCrystalEffect(attacker, defender, _socket1, _power1);
+        }
+
         if (_socket2 != CrystalType.None)
+        {
             ApplyCrystalEffect(attacker, defender, _socket2, _power2);
+        }
+
         if (_socket3 != CrystalType.None)
+        {
             ApplyCrystalEffect(attacker, defender, _socket3, _power3);
+        }
     }
 
     private static void ApplyCrystalEffect(Mobile attacker, Mobile defender, CrystalType type, int power)
@@ -179,10 +202,18 @@ public abstract partial class BaseHumanSword : BaseSword
         list.Add(1042971, $"{"Sockets"}\t{UsedSockets}/{MaxSockets}");
 
         if (_socket1 != CrystalType.None)
+        {
             list.Add(1042971, $"{"[1]"}\t{_socket1} ({"power"} {_power1})");
+        }
+
         if (_socket2 != CrystalType.None)
+        {
             list.Add(1042971, $"{"[2]"}\t{_socket2} ({"power"} {_power2})");
+        }
+
         if (_socket3 != CrystalType.None)
+        {
             list.Add(1042971, $"{"[3]"}\t{_socket3} ({"power"} {_power3})");
+        }
     }
 }

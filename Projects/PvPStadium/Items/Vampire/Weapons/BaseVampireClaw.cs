@@ -61,7 +61,9 @@ public abstract partial class BaseVampireClaw : BaseSword
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         // Life steal: heal attacker for estimated damage / divisor
         // Use weapon base damage as estimate since Mobile doesn't expose per-hit damage

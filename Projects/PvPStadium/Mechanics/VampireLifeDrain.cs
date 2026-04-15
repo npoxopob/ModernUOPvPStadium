@@ -50,7 +50,10 @@ public static class VampireLifeDrain
         Server.CommandSystem.Register("LifeDrain", AccessLevel.Player, e =>
         {
             if (e.Mobile is not PlayerMobile pm)
+            {
                 return;
+            }
+
             if (!IsVampire(pm))
             {
                 pm.SendMessage(0x22, "Эта способность доступна только вампиру.");

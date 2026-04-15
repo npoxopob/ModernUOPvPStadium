@@ -12,10 +12,14 @@ public static class PaladinItemHelper
     public static int GetPaladinLevel(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return 0;
+        }
 
         if (!RaceStateStore.TryGet(m.Serial, out var st) || st == null)
+        {
             return 0;
+        }
 
         return st.RaceKey == "paladin" ? st.Level : 0;
     }
@@ -31,10 +35,14 @@ public static class PaladinItemHelper
     public static bool IsChaosClass(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return false;
+        }
 
         if (!RaceStateStore.TryGet(m.Serial, out var st) || st == null)
+        {
             return false;
+        }
 
         return st.RaceKey is "necromancer" or "vampire";
     }

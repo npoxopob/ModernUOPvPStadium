@@ -54,7 +54,9 @@ public static class VampireItemCommands
     {
         var pack = pm.Backpack;
         if (pack == null)
+        {
             return;
+        }
 
         // Bottle of Blood — all vampire levels get it
         pack.DropItem(new BottleOfBlood());

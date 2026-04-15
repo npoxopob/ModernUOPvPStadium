@@ -67,7 +67,9 @@ public abstract partial class BasePaladinSword : BaseSword
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         var isChaos = PaladinItemHelper.IsChaosClass(defender);
 

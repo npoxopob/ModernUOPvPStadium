@@ -9,10 +9,14 @@ public static class NecromancerItemHelper
     public static int GetNecromancerLevel(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return 0;
+        }
 
         if (!RaceStateStore.TryGet(m.Serial, out var st) || st == null)
+        {
             return 0;
+        }
 
         return st.RaceKey == "necromancer" ? st.Level : 0;
     }
@@ -23,10 +27,14 @@ public static class NecromancerItemHelper
     public static bool IsLightClass(Mobile m)
     {
         if (m is not PlayerMobile)
+        {
             return false;
+        }
 
         if (!RaceStateStore.TryGet(m.Serial, out var st) || st == null)
+        {
             return false;
+        }
 
         return st.RaceKey == "paladin";
     }

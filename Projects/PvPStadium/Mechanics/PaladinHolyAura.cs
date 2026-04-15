@@ -37,7 +37,9 @@ public static class PaladinHolyAura
         CommandSystem.Register("HolyAura", AccessLevel.Player, e =>
         {
             if (e.Mobile is not PlayerMobile pm)
+            {
                 return;
+            }
             if (!IsPaladin(pm))
             {
                 pm.SendMessage(0x22, "Эта способность доступна только паладину.");
@@ -98,11 +100,19 @@ public static class PaladinHolyAura
     public static bool IsAuraActive(Mobile m)
     {
         if (m is not PlayerMobile pm)
+        {
             return false;
+        }
+
         if (!IsPaladin(pm))
+        {
             return false;
+        }
+
         if (!PvPStadium.Races.RaceStateStore.TryGet(pm.Serial, out var st) || st == null)
+        {
             return false;
+        }
         return st.HolyAuraActiveUntilTicks > DateTime.UtcNow.Ticks;
     }
 }

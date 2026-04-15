@@ -48,11 +48,15 @@ public partial class RingOfHeaven : BaseRing
     public static bool TryReflectParalyze(Mobile target, Mobile caster)
     {
         if (target is not PlayerMobile pm)
+        {
             return false;
+        }
 
         var ring = pm.FindItemOnLayer<RingOfHeaven>(Layer.Ring);
         if (ring == null)
+        {
             return false;
+        }
 
         // 33% chance to reflect
         if (Utility.RandomDouble() < 0.33)

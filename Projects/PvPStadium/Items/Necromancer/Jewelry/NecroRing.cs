@@ -86,7 +86,9 @@ public partial class NecroRing : BaseRing
     {
         var ring = target.FindItemOnLayer<NecroRing>(Layer.Ring);
         if (ring == null || !ring._paralyzeResist)
+        {
             return false;
+        }
 
         if (Utility.RandomDouble() < 0.33)
         {
@@ -103,7 +105,9 @@ public partial class NecroRing : BaseRing
     {
         var ring = target.FindItemOnLayer<NecroRing>(Layer.Ring);
         if (ring == null || !ring._paralyzeReflect)
+        {
             return false;
+        }
 
         if (caster != null && caster != target && Utility.RandomDouble() < 0.33)
         {
@@ -122,8 +126,12 @@ public partial class NecroRing : BaseRing
         base.GetProperties(list);
 
         if (_paralyzeReflect)
+        {
             list.Add(1042971, $"{"33% Paralyze Reflect"}");
+        }
         else if (_paralyzeResist)
+        {
             list.Add(1042971, $"{"33% Paralyze Resist"}");
+        }
     }
 }

@@ -66,7 +66,9 @@ public abstract partial class BaseNecroStaff : BaseStaff
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive || !attacker.Alive)
+        {
             return;
+        }
 
         // Curse of Decay proc
         if (CurseChance > 0.0 && Utility.RandomDouble() < CurseChance)
@@ -81,7 +83,9 @@ public abstract partial class BaseNecroStaff : BaseStaff
 
         // Don't stack
         if (defender.GetStatMod(modName) != null)
+        {
             return;
+        }
 
         var intReduction = Utility.RandomMinMax(CurseIntMin, CurseIntMax);
         defender.AddStatMod(new StatMod(StatType.Int, modName, -intReduction,

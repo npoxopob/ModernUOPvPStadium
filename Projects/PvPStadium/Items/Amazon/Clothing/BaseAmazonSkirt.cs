@@ -56,7 +56,9 @@ public abstract partial class BaseAmazonSkirt : BaseOuterLegs
     {
         var skirt = target.FindItemOnLayer<BaseAmazonSkirt>(Layer.OuterLegs);
         if (skirt == null)
+        {
             return false;
+        }
 
         if (skirt.ClumsyReflect && caster != null && caster != target)
         {
@@ -80,7 +82,9 @@ public abstract partial class BaseAmazonSkirt : BaseOuterLegs
     {
         var skirt = target.FindItemOnLayer<BaseAmazonSkirt>(Layer.OuterLegs);
         if (skirt == null || !skirt.WeakenReflect)
+        {
             return false;
+        }
 
         if (caster != null && caster != target)
         {
@@ -97,11 +101,17 @@ public abstract partial class BaseAmazonSkirt : BaseOuterLegs
         base.GetProperties(list);
 
         if (ClumsyReflect)
+        {
             list.Add(1042971, $"{"Reflects Clumsy"}");
+        }
         else if (ClumsyResist)
+        {
             list.Add(1042971, $"{"Resists Clumsy"}");
+        }
 
         if (WeakenReflect)
+        {
             list.Add(1042971, $"{"Reflects Weaken"}");
+        }
     }
 }

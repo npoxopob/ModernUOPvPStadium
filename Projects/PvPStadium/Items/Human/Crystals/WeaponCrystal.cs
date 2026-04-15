@@ -73,6 +73,8 @@ public partial class WeaponCrystal : Item
         };
 
         if (desc.Length > 0)
+        {
             list.Add(1042971, $"{desc}");
+        }
     }
 }

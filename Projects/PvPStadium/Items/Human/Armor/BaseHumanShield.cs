@@ -22,7 +22,9 @@ public abstract partial class BaseHumanShield : BaseShield
         LootType = LootType.Blessed;
 
         if (ReflectPhysical > 0)
+        {
             Attributes.ReflectPhysical = ReflectPhysical;
+        }
     }
 
     public override bool CanEquip(Mobile from)

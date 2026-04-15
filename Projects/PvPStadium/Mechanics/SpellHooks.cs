@@ -14,7 +14,9 @@ public static class SpellHooks
     public static bool PvPStadium_OnWeaken(Mobile target, Mobile caster)
     {
         if (target is not PlayerMobile)
+        {
             return false;
+        }
 
         // Berserker kilt immunity
         if (BaseBerserkerKilt.HasWeakenImmunity(target))
@@ -41,7 +43,9 @@ public static class SpellHooks
     public static bool PvPStadium_OnClumsy(Mobile target, Mobile caster)
     {
         if (target is not PlayerMobile)
+        {
             return false;
+        }
 
         // Amazon skirt Clumsy resist/reflect
         if (BaseAmazonSkirt.TryClumsyReflect(target, caster))
@@ -59,7 +63,9 @@ public static class SpellHooks
     public static bool PvPStadium_OnCurse(Mobile target, Mobile caster)
     {
         if (target is not PlayerMobile)
+        {
             return false;
+        }
 
         if (BaseBerserkerKilt.HasCurseImmunity(target))
         {

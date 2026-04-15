@@ -62,7 +62,9 @@ public abstract partial class BaseVampireHand : BaseRanged
         base.OnHit(attacker, defender, damageBonus);
 
         if (defender == null || !defender.Alive)
+        {
             return;
+        }
 
         // Fire visual on every hit
         defender.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
@@ -92,7 +94,9 @@ public static class VampireIgnition
     public static void Begin(Mobile target, Mobile attacker, int ticks, int minDmg, int maxDmg)
     {
         if (_active.TryGetValue(target, out var existing))
+        {
             existing.Stop();
+        }
 
         var timer = new IgnitionTimer(target, attacker, ticks, minDmg, maxDmg);
         _active[target] = timer;
@@ -102,7 +106,9 @@ public static class VampireIgnition
     public static void End(Mobile target)
     {
         if (_active.Remove(target, out var t))
+        {
             t.Stop();
+        }
     }
 
     private class IgnitionTimer : Timer
@@ -139,7 +145,9 @@ public static class VampireIgnition
 
             _remaining--;
             if (_remaining <= 0)
+            {
                 End(_target);
+            }
         }
     }
 }
