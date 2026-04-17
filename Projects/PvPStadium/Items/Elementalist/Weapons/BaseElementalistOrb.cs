@@ -28,6 +28,10 @@ public abstract partial class BaseElementalistOrb : BaseBashing
     [SerializableField(0)]
     private int _hitCounter;
 
+    // Make the weapon indestructible — prevents deletion when hits reach 0 in PvP
+    public override int InitMinHits => 10000;
+    public override int InitMaxHits => 10000;
+
     protected BaseElementalistOrb(int itemID) : base(itemID)
     {
         LootType = LootType.Blessed;
@@ -67,6 +71,11 @@ public abstract partial class BaseElementalistOrb : BaseBashing
         }
 
         var (color, name) = GetElementInfo(newElement);
+
+        // Update weapon hue to match current element
+        Hue = color;
+        InvalidateProperties();
+
         from.SendMessage(color, $"Element switched to: {name}. Overcharge reset.");
         from.PlaySound(0x1E9);
     }

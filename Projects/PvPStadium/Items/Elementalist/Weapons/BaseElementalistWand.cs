@@ -33,6 +33,10 @@ public abstract partial class BaseElementalistWand : BaseBashing
     /// <summary>Burst AoE radius override.</summary>
     public virtual int BurstRadius => OverchargeSystem.DefaultBurstRadius;
 
+    // Make the weapon indestructible — prevents deletion when hits reach 0 in PvP
+    public override int InitMinHits => 10000;
+    public override int InitMaxHits => 10000;
+
     protected BaseElementalistWand(int itemID) : base(itemID)
     {
         LootType = LootType.Blessed;
@@ -73,6 +77,11 @@ public abstract partial class BaseElementalistWand : BaseBashing
         }
 
         var (color, name) = GetElementInfo(newElement);
+
+        // Update weapon hue to match current element
+        Hue = color;
+        InvalidateProperties();
+
         from.SendMessage(color, $"Element switched to: {name}. Overcharge reset.");
         from.PlaySound(0x1E9);
         from.FixedParticles(0x375A, 10, 15, 5037, color, 0, EffectLayer.Waist);
