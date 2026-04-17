@@ -19,7 +19,8 @@ internal class RaceSelectionGump : Gump
         ("amazon", 0x3B2, "Agile huntresses with deadly precision.\nWeapons: Spears, Krysses, Bows\nSpecial: Paralyze, Poison, Distance Crit, Clumsy Reflect"),
         ("necromancer", 0x455, "Dark mages who command death itself.\nWeapons: Staves, Daggers\nSpecial: Curse of Decay, Soul Drain, Mana Drain, Holy Resist"),
         ("human", 0x835, "Versatile warriors with customizable weapons.\nWeapons: Swords with Crystal Sockets\nSpecial: Fire/Ice/Poison/Thunder/Life Crystals, Shields"),
-        ("monk", 0x480, "Masters of martial arts fueled by Chi.\nWeapons: Staves, Fists (Macing)\nSpecial: Chi System, Counter Strike, Rapid Flurry, Evasion")
+        ("monk", 0x480, "Masters of martial arts fueled by Chi.\nWeapons: Staves, Fists (Macing)\nSpecial: Chi System, Counter Strike, Rapid Flurry, Evasion"),
+        ("elementalist", 0x489, "Burst mages who channel elemental forces.\nWeapons: Wands, Orbs (Macing)\nSpecial: Overcharge System, Elemental Burst (Fire/Ice/Lightning)")
     };
 
     public RaceSelectionGump(PlayerMobile pm) : base(0, 0)
@@ -204,6 +205,11 @@ internal class RaceLevelGump : Gump
         ("monk", 2) => "Counter Strike (25%). Flurry (20%). Dodge Magic 20%. Incense.",
         ("monk", 3) => "Dragon Staff (+8 vs Berserker). Tiger Fists. 30% Dodge Magic.",
         ("monk", 4) => "Celestial weapons. +15 DEX. 40% Dodge. Paralyze Immunity.",
+
+        ("elementalist", 1) => "Apprentice Wand/Orb. Fire only. 3 Overcharge. Initiate Mantle (+5 INT). Focus Ring (+1 FC).",
+        ("elementalist", 2) => "Evoker Wand/Orb. Fire+Ice. 25% proc. Evoker Mantle (+10 INT, 10% Spell Absorb). Evoker Ring.",
+        ("elementalist", 3) => "Storm Wand/Orb. All 3 elements. Resonance Ring (15% Double Burst). 20% Spell Absorb.",
+        ("elementalist", 4) => "Archmage Wand/Orb. 40% proc. Mini-Burst orb. Archmage Mantle (30% Absorb). 25% Double Burst.",
 
         _ => ""
     };

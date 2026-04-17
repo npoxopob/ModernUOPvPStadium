@@ -75,5 +75,16 @@
       { "Level": 3, "Name": "Monk" },
       { "Level": 4, "Name": "Grandmaster" }
     ]
+  },
+  {
+    "Key": "elementalist",
+    "Display": "Elementalist Path",
+    "Enabled": true,
+    "Levels": [
+      { "Level": 1, "Name": "Initiate" },
+      { "Level": 2, "Name": "Evoker" },
+      { "Level": 3, "Name": "Elementalist" },
+      { "Level": 4, "Name": "Archmage" }
+    ]
   }
 ]
