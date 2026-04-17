@@ -17,10 +17,10 @@ public partial class EvokersOrb : BaseElementalistOrb
     public override int AosStrengthReq => 10;
 
     [Constructible]
-    public EvokersOrb() : base(0x0E2D)
+    public EvokersOrb() : base(0x0F5C)
     {
         Name = "Evoker's Orb";
-        Hue = 0x48D;
+        Hue = 0x480; // ice blue
         Weight = 2.0;
     }
 }

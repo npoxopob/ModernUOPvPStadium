@@ -15,10 +15,10 @@ public partial class ApprenticeOrb : BaseElementalistOrb
     public override int AosStrengthReq => 10;
 
     [Constructible]
-    public ApprenticeOrb() : base(0x0E2D) // crystal ball graphic
+    public ApprenticeOrb() : base(0x0F5C) // mace graphic (round head = orb)
     {
         Name = "Apprentice Orb";
-        Hue = 0x489;
+        Hue = 0x489; // fire orange
         Weight = 2.0;
     }
 }

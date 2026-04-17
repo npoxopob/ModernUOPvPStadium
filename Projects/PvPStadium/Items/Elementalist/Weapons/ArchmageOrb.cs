@@ -20,10 +20,10 @@ public partial class ArchmageOrb : BaseElementalistOrb
     public override int AosStrengthReq => 10;
 
     [Constructible]
-    public ArchmageOrb() : base(0x0E2D)
+    public ArchmageOrb() : base(0x0F5C)
     {
         Name = "Archmage Orb";
-        Hue = 0x497;
+        Hue = 0x497; // deep arcane purple
         Weight = 2.0;
     }
 }

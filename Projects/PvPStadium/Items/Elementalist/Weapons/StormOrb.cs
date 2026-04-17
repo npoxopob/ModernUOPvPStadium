@@ -18,10 +18,10 @@ public partial class StormOrb : BaseElementalistOrb
     public override int AosStrengthReq => 10;
 
     [Constructible]
-    public StormOrb() : base(0x0E2D)
+    public StormOrb() : base(0x0F5C)
     {
         Name = "Storm Orb";
-        Hue = 0x490;
+        Hue = 0x490; // lightning electric blue
         Weight = 2.0;
     }
 }
